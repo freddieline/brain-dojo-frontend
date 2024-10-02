@@ -1,0 +1,1 @@
+{"root":["./src/app.test.tsx","./src/app.tsx","./src/index.tsx","./src/react-app-env.d.ts","./src/setuptests.ts","./src/hooks/usefetch.tsx","./src/lib/snaketocamel.ts","./src/routes/geography.tsx","./src/routes/history.tsx","./src/routes/home.tsx","./src/routes/scaleinscience.tsx","./src/types/capital.ts","./src/types/quizquestion.ts"],"version":"5.6.2"}
