@@ -9,7 +9,6 @@ export interface QuizQuestion {
   quizName: string;
 }
 
-
 export interface Feedback {
   quizName: string;
   feedback: string;
@@ -21,6 +20,7 @@ export type CapitalQuestion = {
 	capital: string;
 	country: string;
 	showAnswer?: boolean;
+  isCorrect?: boolean;
 };
 
 

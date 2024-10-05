@@ -3,7 +3,10 @@ import { useState, ChangeEvent } from "react";
 import type { CapitalQuestion } from "../types/types";
 import { TextInput } from 'flowbite-react';
 import { HiCheckCircle } from "react-icons/hi";
-import Layout from "../layout/Layout"
+import { ImCross } from "react-icons/im";
+
+import Layout from "../layout/Layout";
+import { Button } from 'flowbite-react';
 
 const Geography = () => {
 	const url = "https://quiz-express-57b839d4ea17.herokuapp.com/api/capitals";
@@ -13,6 +16,11 @@ const Geography = () => {
 		},
 	});
 	const [numberComplete, setNumberComplete] = useState<number>(0);
+	const [complete, setComplete] = useState(false);
+
+	function revealAnswers() {
+		setComplete(true);
+	}
 
 	function onChange(
 		e: ChangeEvent<HTMLInputElement>,
@@ -26,7 +34,7 @@ const Geography = () => {
 						item.country == capital.country &&
 						capital.capital.toLowerCase() == e.target.value.toLowerCase()
 					) {
-						item.showAnswer = true;
+						item.isCorrect = true;
 						setNumberComplete((prev) => (prev += 1));
 					}
 					accum.push(item);
@@ -64,11 +72,13 @@ const Geography = () => {
 									disabled={capital.showAnswer}
 									onChange={(e) => onChange(e, capital)}
 								></TextInput>
-								{capital.showAnswer && <HiCheckCircle color="green" size={30} className="mt-1 ml-4"></HiCheckCircle>}
+								{capital.isCorrect && <HiCheckCircle color="green" size={30} className="mt-1 ml-4"></HiCheckCircle>}
+								{(complete && !capital.isCorrect) && <ImCross color="red" size={30} className="mt-1 ml-4"></ImCross>}
 							</div>
 						);
 					})}
 			</div>
+			<Button className="text-white bg-blue-700 rounded-lg border-4 border-blue-800 p-2 font-bold"  onClick={revealAnswers}>Reveal answers</Button>
 		</Layout>
 	);
 };
