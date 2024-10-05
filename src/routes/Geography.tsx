@@ -12,7 +12,7 @@ const Geography = () => {
 			continent: "europe",
 		},
 	});
-	const [numberComplete, setNumberComplete] = useState<number>(0);
+	const [_, setNumberComplete] = useState<number>(0);
 
 	function onChange(
 		e: ChangeEvent<HTMLInputElement>,
