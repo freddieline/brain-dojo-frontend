@@ -73,7 +73,7 @@ const Geography = () => {
 									onChange={(e) => onChange(e, capital)}
 								></TextInput>
 								{capital.isCorrect && <HiCheckCircle color="green" size={30} className="mt-1 ml-4"></HiCheckCircle>}
-								{(complete && !capital.isCorrect) && <ImCross color="red" size={30} className="mt-1 ml-4"></ImCross>}
+								{(complete && !capital.isCorrect) && <><ImCross color="red" size={30} className="mt-1 ml-4 mr-3"></ImCross> {` `+capital.capital}</>}
 							</div>
 						);
 					})}
