@@ -13,28 +13,9 @@ import { IoIosThumbsUp, IoIosThumbsDown } from "react-icons/io";
 const ScaleInScience = () => {
 	const url = import.meta.env['VITE_QUIZ_API'] + "/api/quiz-questions?topic=Scale%20in%20Science";
 
-	const [answers, setAnswers] = useState<Answer[]>([{
-		question:1,
-		like:true,
-		guess:2,
-		isCorrect:true,
-	},
-	{
-		question:3,
-		like:false,
-		guess:2,
-		isCorrect:true,
-	},
-	{
-		question:4,
-		like:false,
-		guess:2,
-		isCorrect:true,
-	}
-
-]);
+	const [answers, setAnswers] = useState<Answer[]>([]);
 	const [questionNumber, setQuestionNumber] = useState<number>(1);
-	const [quizFinished, setQuizFinished ] = useState<boolean>(true);
+	const [quizFinished, setQuizFinished ] = useState<boolean>(false);
 
 
   const { isPending, error, data } = useQuery({
