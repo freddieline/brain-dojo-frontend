@@ -12,7 +12,7 @@ const Geography = () => {
 			continent: "europe",
 		},
 	});
-	const [_, setNumberComplete] = useState<number>(0);
+	const [numberComplete, setNumberComplete] = useState<number>(0);
 
 	function onChange(
 		e: ChangeEvent<HTMLInputElement>,
@@ -47,9 +47,12 @@ const Geography = () => {
 		return <p>Error ... {error.message}</p>;
 	}
 
+
+
 	return (
 		<Layout>
 			<div className="font-bold mb-4">Enter as many capitals of Europe as you can in 2 minutes</div>
+			<div className="font-bold mb-4">You have {numberComplete} correct!</div>
 			<div className="flex flex-col">
 				{data &&
 					data.map((capital) => {
