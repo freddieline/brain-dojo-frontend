@@ -1,6 +1,6 @@
 import { useFetch } from "../hooks/useFetch";
 import { useState, ChangeEvent } from "react";
-import type { CapitalQuestion } from "../types/Capital";
+import type { CapitalQuestion } from "../types/types";
 
 const Geography = () => {
 	const url = "https://quiz-express-57b839d4ea17.herokuapp.com/api/capitals";
