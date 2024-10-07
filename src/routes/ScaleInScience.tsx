@@ -11,12 +11,12 @@ import { IoIosThumbsUp, IoIosThumbsDown } from "react-icons/io";
 
 
 const ScaleInScience = () => {
-	const url = import.meta.env['VITE_QUIZ_API'] + "/api/quiz-questions?topic=Scale%20in%20Science";
+	const quizName = "Scale in Science"
+	const url = import.meta.env['VITE_QUIZ_API'] + "/api/quiz-questions?topic="+ quizName;
 
 	const [answers, setAnswers] = useState<Answer[]>([]);
 	const [questionNumber, setQuestionNumber] = useState<number>(1);
 	const [quizFinished, setQuizFinished ] = useState<boolean>(false);
-
 
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
@@ -47,13 +47,10 @@ const ScaleInScience = () => {
 	
 		const handleThumbsDown = () => {
 			if(answers){
-				console.log(answers);
 				let newAnswers = [...answers];
 				newAnswers[questionNumber - 1].like = false;
 				setAnswers(newAnswers);
 			}
-
-			console.log(answers);
 		}
 
 		const handleNextQuestion = () => {
@@ -61,7 +58,6 @@ const ScaleInScience = () => {
 			if(questionNumber < questions.length) {
 				setQuestionNumber(questionNumber + 1);
 			} else {
-				console.log(questionNumber, questions.length);
 				setQuizFinished(true);
 			}
 		}
@@ -180,7 +176,7 @@ const ScaleInScience = () => {
 		} else {
 			return (
 				<Layout>
-					<Results answers={answers} questions={questions}></Results>
+					<Results quizName={quizName} numberCorrect={answers.filter((item)=> item.isCorrect).length} totalQuestions={data.length} answers={answers} questions={questions}></Results>
 				</Layout>
 			)
 		}

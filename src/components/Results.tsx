@@ -5,10 +5,14 @@ import { Link } from "react-router-dom";
 import {
   useMutation,
 } from '@tanstack/react-query';
+import Layout from '../layout/Layout'
 
 type InputProps = {
-  answers: Answer[];
-  questions: QuizQuestion[];
+  quizName: string;
+  numberCorrect: number;
+  totalQuestions: number;
+  answers?: Answer[];
+  questions?: QuizQuestion[];
 }
 
 const submitFormData = async (formData: Feedback): Promise<any> => {
@@ -28,10 +32,12 @@ const submitFormData = async (formData: Feedback): Promise<any> => {
   return response.json();
 }
 
-const Results: React.FC<InputProps> = ({answers, questions}) => {
+const Results: React.FC<InputProps> = ({quizName, numberCorrect, totalQuestions, answers, questions}) => {
+
+  console.log(totalQuestions);
 
   const [formData, setFormData ] = useState<Feedback>({
-    quizName: questions[0].quizName,
+    quizName: quizName,
     feedback: ''
   });
 
@@ -53,14 +59,14 @@ const Results: React.FC<InputProps> = ({answers, questions}) => {
     mutationFn: submitFormData,
     onSuccess: () => {
       setFormData({
-        quizName: questions[0].quizName,
+        quizName: quizName,
         feedback: '',
         }); 
     },
   });
 
   let likedAnswers: Answer[] = [];
-  if (answers.length > 0){
+  if (answers && answers.length > 0){
     likedAnswers = answers.reduce((accum: Answer[], answer) => {
       if(answer.like) {
         accum.push(answer);
@@ -72,7 +78,7 @@ const Results: React.FC<InputProps> = ({answers, questions}) => {
   }
 
   let dislikedAnswers: Answer[] = [];
-  if (answers.length > 0){
+  if (answers && answers.length > 0){
     dislikedAnswers = answers.reduce((accum: Answer[], answer) => {
       if(answer.like == false) {
         accum.push(answer);
@@ -85,39 +91,46 @@ const Results: React.FC<InputProps> = ({answers, questions}) => {
 
   const feedbackHidden =  mutation.isSuccess ? " hidden" : " ";
 
-  return (<form onSubmit={handleSubmit}>
-    <h1 className="text-2xl bold mb-4 font-bold">&#127881; Well done! &#127881;</h1>
-    <p className="font-bold">You got {answers.filter((answer) => answer.isCorrect).length} of {questions.length} correct</p>
-   
-      { likedAnswers.length > 0 && 
-        <>
-          <p className="font-bold mt-3 mb-2">You liked these questions:</p>
-          <ul>
-            {likedAnswers.map((answer) => {
-                return <li key={answer.question} className="text-sm">{answer.question}. {questions[answer.question - 1].question}</li>
-            },'')}
-          </ul>
-        </>
-      }
-      { dislikedAnswers.length > 0 && 
-        <>
-          <p className="font-bold mt-3 mb-2">You did not like these questions:</p>
-          <ul>
-            {dislikedAnswers.map((answer) => {
-                return <li className="text-sm">{answer.question}. {questions[answer.question - 1].question}</li>							
-            },'')}
-          </ul>
-        </>
-      }
-      <p className={"font-bold mb-2 mt-4" + feedbackHidden}>Additional feedback</p>
-      <Textarea id="feedback" onChange={handleChange} rows={3} className={'w-500'+feedbackHidden}></Textarea>
-      <div className="flex flex-row mt-4 gap-3">
-        <Link to="/"><Button className="rounded-lg border-4 gray-700 p-2 font-bold text-gray">Back to main menu</Button></Link>
-        <Button type="submit" disabled={mutation.isPending} color="gray" className={"text-white bg-blue-700 rounded-lg border-4 border-blue-800 p-2 font-bold"+feedbackHidden}>
-          {mutation.isPending ? 'Submitting...' : 'Submit feedback'}
-        </Button>
-      </div>
-  </form>
+  return (
+    <Layout>
+      <form onSubmit={handleSubmit}>
+      { numberCorrect != 0 && <h1 className="text-2xl bold mb-5 font-bold">&#127881; Well done! &#127881;</h1>} 
+      { numberCorrect == 0 && <h1 className="text-2xl bold mb-5 font-bold">Oh dear!</h1>} 
+      <p className="font-bold">You got {numberCorrect} of {totalQuestions} correct</p>
+    
+        { likedAnswers.length > 0 && 
+          <>
+            <p className="font-bold mt-3 mb-2">You liked these questions:</p>
+            <ul>
+              {likedAnswers.map((answer) => {
+                  return <li key={answer.question} className="text-sm">{answer.question}. {questions && questions[answer.question - 1].question}</li>
+              },'')}
+            </ul>
+          </>
+        }
+        { dislikedAnswers.length > 0 && 
+          <>
+            <p className="font-bold mt-3 mb-2">You did not like these questions:</p>
+            <ul>
+              {dislikedAnswers.map((answer) => {
+                  return <li className="text-sm">{answer.question}. {questions && questions[answer.question - 1].question}</li>							
+              },'')}
+            </ul>
+          </>
+        }
+        <div className="flex flex-row mt-5 gap-3">
+          <Link to="/capitals-of-europe"><Button className="rounded-lg border-4 border-blue-800 p-2 font-bold text-gray bg-blue-700 text-white">Retry</Button></Link>
+          <Link to="/"><Button className="rounded-lg border-4 border-blue-800 p-2 font-bold text-gray">Back to main menu</Button></Link>
+        </div>
+        <p className={"font-bold mb-2 mt-4" + feedbackHidden}>Additional feedback</p>
+        <Textarea id="feedback" onChange={handleChange} rows={3} className={'w-500'+feedbackHidden}></Textarea>
+        <div className="flex flex-row mt-4 gap-3">
+          <Button type="submit" disabled={mutation.isPending} color="gray" className={"rounded-lg border-4 border-blue-800 p-2 font-bold"+feedbackHidden}>
+            {mutation.isPending ? 'Submitting...' : 'Submit feedback'}
+          </Button>
+        </div>
+      </form>
+    </Layout>
   )
 
 }
