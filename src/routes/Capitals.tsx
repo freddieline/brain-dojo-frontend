@@ -1,6 +1,6 @@
 
 import { Button } from 'flowbite-react';
-import CapitalsQuiz from '../components/CapitalsQuiz';
+import CapitalsQuiz from '../quizzes/CapitalsQuiz';
 import { useState } from 'react'
 import Layout from '../layout/Layout';
 

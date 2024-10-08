@@ -16,9 +16,9 @@ type InputProps  = {
 
 const CapitalsQuiz:React.FC<InputProps> = ({continent}) => {
 
-	const quizName = "Capitals quiz";
+	const quizName = "Capital cities";
 
-	const url = "https://quiz-express-57b839d4ea17.herokuapp.com/api/capitals";
+	const url = import.meta.env['VITE_QUIZ_API'] + "/api/capitals";
 
 	const { data, loading, error } = useFetch<CapitalQuestion[]>(url, {
 		searchParams: {
@@ -65,7 +65,7 @@ const CapitalsQuiz:React.FC<InputProps> = ({continent}) => {
 
 
 	if(showResults){
-		return <Results totalQuestions={10} numberCorrect={numberComplete} quizName={quizName}></Results>
+		return <Results totalQuestions={10} numberCorrect={numberComplete} quizName={quizName} quizRoute="/capitals"></Results>
 	}
 
 	if(data && data.length > 0) {
@@ -102,7 +102,7 @@ const CapitalsQuiz:React.FC<InputProps> = ({continent}) => {
 				<CountdownCircleTimer
 					size={100}
 					isPlaying={!complete}
-					duration={60}
+					duration={45}
 					colors={[ '#F7B801', '#A30000', '#A30000']}
 					colorsTime={[10, 5, 0]}
 				>

@@ -11,6 +11,7 @@ type InputProps = {
   quizName: string;
   numberCorrect: number;
   totalQuestions: number;
+  quizRoute: string;
   answers?: Answer[];
   questions?: QuizQuestion[];
 }
@@ -32,7 +33,7 @@ const submitFormData = async (formData: Feedback): Promise<any> => {
   return response.json();
 }
 
-const Results: React.FC<InputProps> = ({quizName, numberCorrect, totalQuestions, answers, questions}) => {
+const Results: React.FC<InputProps> = ({quizName, numberCorrect, totalQuestions, answers, questions, quizRoute}) => {
 
   console.log(totalQuestions);
 
@@ -119,7 +120,7 @@ const Results: React.FC<InputProps> = ({quizName, numberCorrect, totalQuestions,
           </>
         }
         <div className="flex flex-row mt-5 gap-3">
-          <Link to="/capitals-of-europe"><Button className="rounded-lg border-4 border-blue-800 p-2 font-bold text-gray bg-blue-700 text-white">Retry</Button></Link>
+          <Link to={quizRoute}><Button className="rounded-lg border-4 border-blue-800 p-2 font-bold text-gray bg-blue-700 text-white">Retry</Button></Link>
           <Link to="/"><Button className="rounded-lg border-4 border-blue-800 p-2 font-bold text-gray">Back to main menu</Button></Link>
         </div>
         <p className={"font-bold mb-2 mt-4" + feedbackHidden}>Additional feedback</p>

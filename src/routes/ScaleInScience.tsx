@@ -140,7 +140,7 @@ const ScaleInScience = () => {
 	if(!quizFinished){
 		return (
 			<Layout>
-				<h1 className="text-2xl bold mb-3">Scale in Science</h1>
+				<h1 className="text-2xl bold mb-3">Scale in Science Quiz</h1>
 				<h1 className="text-xl bold mb-3">{questionNumber} of {questions.length}</h1>
 				<div className={"flex flex-row justify-end mb-2 "+feedbackHidden}>
 					<IoIosThumbsDown onClick={handleThumbsDown} color={currentAnswer?.like === false ? `red`: `black`} />
@@ -176,7 +176,13 @@ const ScaleInScience = () => {
 		} else {
 			return (
 				<Layout>
-					<Results quizName={quizName} numberCorrect={answers.filter((item)=> item.isCorrect).length} totalQuestions={data.length} answers={answers} questions={questions}></Results>
+					<Results 
+						quizName={quizName} 
+						numberCorrect={answers.filter((item) => item.isCorrect).length} 
+						totalQuestions={answers.length} 
+						quizRoute="/scale-in-science"
+						answers={answers} questions={questions}>
+						</Results>
 				</Layout>
 			)
 		}
