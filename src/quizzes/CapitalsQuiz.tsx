@@ -79,7 +79,7 @@ const CapitalsQuiz:React.FC<InputProps> = ({continent}) => {
 					(accum: CapitalQuestion[], item: CapitalQuestion) => {
 						if (
 							item.country == capital.country &&
-							capital.capital.toLowerCase() == e.target.value.toLowerCase()
+							capital.capital.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 						) {
 							item.isCorrect = true;
 							setNumberComplete((prev) => (prev += 1));
@@ -102,7 +102,7 @@ const CapitalsQuiz:React.FC<InputProps> = ({continent}) => {
 				<CountdownCircleTimer
 					size={100}
 					isPlaying={!complete}
-					duration={45}
+					duration={60}
 					colors={[ '#F7B801', '#A30000', '#A30000']}
 					colorsTime={[10, 5, 0]}
 				>
