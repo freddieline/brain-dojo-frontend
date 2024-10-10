@@ -453,11 +453,11 @@ video {
 	display: none;
 }
 
-:root,
+/* :root,
 [data-theme] {
 	background-color: var(--fallback-b1, oklch(var(--b1) / 1));
 	color: var(--fallback-bc, oklch(var(--bc) / 1));
-}
+} */
 
 @supports not (color: oklch(0% 0 0)) {
 	:root {
