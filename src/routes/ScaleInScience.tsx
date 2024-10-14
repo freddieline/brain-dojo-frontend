@@ -27,7 +27,7 @@ const ScaleInScience = () => {
   })
 
 	if (isPending) {
-		return <p>Loading ... </p>;
+		return <p></p>;
 	}
 
 	if (error) {
@@ -54,7 +54,6 @@ const ScaleInScience = () => {
 		}
 
 		const handleNextQuestion = () => {
-			console.log(questionNumber, questions.length);
 			if(questionNumber < questions.length) {
 				setQuestionNumber(questionNumber + 1);
 			} else {

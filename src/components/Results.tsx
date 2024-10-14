@@ -35,8 +35,6 @@ const submitFormData = async (formData: Feedback): Promise<any> => {
 
 const Results: React.FC<InputProps> = ({quizName, numberCorrect, totalQuestions, answers, questions, quizRoute}) => {
 
-  console.log(totalQuestions);
-
   const [formData, setFormData ] = useState<Feedback>({
     quizName: quizName,
     feedback: ''

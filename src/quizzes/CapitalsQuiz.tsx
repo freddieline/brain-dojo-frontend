@@ -47,7 +47,7 @@ const CapitalsQuiz:React.FC<InputProps> = ({continent}) => {
 	}
 
 	if (loading) {
-		return <p>Loading ... </p>;
+		return <p></p>;
 	}
 
 	if (error) {
