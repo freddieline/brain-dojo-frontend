@@ -16,14 +16,6 @@ export interface Feedback {
   dislikedQuestions?: number[]
 }
 
-export type CapitalQuestion = {
-	capital: string;
-	country: string;
-	showAnswer?: boolean;
-  isCorrect?: boolean;
-};
-
-
 export interface Answer {
 	question: number;
 	guess?: number;
