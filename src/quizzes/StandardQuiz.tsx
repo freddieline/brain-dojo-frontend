@@ -5,18 +5,21 @@ import Layout from "../layout/Layout";
 import {
   useQuery,
 } from '@tanstack/react-query'
-import { QuizQuestion, Answer } from "../types/types";
-import { transformKeys } from "../lib/snakeToCamel";
-import { IoIosThumbsUp, IoIosThumbsDown } from "react-icons/io";
+import {  Answer } from "../types/types";
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
+type InputProps = {
+	quizName: string;
+}
 
-const ScaleInScience = () => {
-	const quizName = "Scale in Science"
-	const url = import.meta.env['VITE_QUIZ_API'] + "/api/quiz-questions?topic="+ quizName;
+const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
+
+	const url = import.meta.env['VITE_QUIZ_API'] + "/api/quiz-questions?quiz_name="+ quizName;
 
 	const [answers, setAnswers] = useState<Answer[]>([]);
 	const [questionNumber, setQuestionNumber] = useState<number>(1);
 	const [quizFinished, setQuizFinished ] = useState<boolean>(false);
+	const [key, setKey] = useState(0);
 
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
@@ -24,7 +27,25 @@ const ScaleInScience = () => {
       fetch(url).then((res) =>
         res.json(),
       ),
-  })
+  });
+
+
+	const renderTime = ({ remainingTime  }: { remainingTime: number }) => {
+		if (remainingTime === 0) {
+			if(!answers[questionNumber -1]){
+				console.log("aaa");
+				let newAnswers = [...answers];
+				newAnswers[questionNumber - 1] = {
+					...newAnswers[questionNumber - 1],
+					question: questionNumber,
+					isCorrect: false
+				};
+				setAnswers(newAnswers);
+			}
+			return 0;
+		}
+		return remainingTime;
+	};
 
 	if (isPending) {
 		return <p></p>;
@@ -35,23 +56,7 @@ const ScaleInScience = () => {
 	}
 
 	if (data) {
-		const questions = transformKeys(data.data) as QuizQuestion[];
-
-		const handleThumbsUp = () => {
-			if(answers){
-				let newAnswers = [...answers];
-				newAnswers[questionNumber - 1].like = true;
-				setAnswers(newAnswers);
-			}
-		}
-	
-		const handleThumbsDown = () => {
-			if(answers){
-				let newAnswers = [...answers];
-				newAnswers[questionNumber - 1].like = false;
-				setAnswers(newAnswers);
-			}
-		}
+		const questions = data;
 
 		const handleNextQuestion = () => {
 			if(questionNumber < questions.length) {
@@ -59,6 +64,13 @@ const ScaleInScience = () => {
 			} else {
 				setQuizFinished(true);
 			}
+			setKey(key +1);
+		}
+
+		function onRestart(){
+			setQuizFinished(false);
+			setQuestionNumber(1);
+			setAnswers([]);
 		}
 
 		const handleClickAnswer = (answer: number) => {
@@ -133,20 +145,27 @@ const ScaleInScience = () => {
 			}
 	}
 
-	const feedbackHidden =  answers?.[questionNumber-1] ? "" : " invisible";
-	const currentAnswer = answers?.[questionNumber - 1 ];
-
 	if(!quizFinished){
 		return (
 			<Layout>
-				<h1 className="text-2xl bold mb-3">Scale in Science Quiz</h1>
-				<h1 className="text-xl bold mb-3">{questionNumber} of {questions.length}</h1>
-				<div className={"flex flex-row justify-end mb-2 "+feedbackHidden}>
-					<IoIosThumbsDown onClick={handleThumbsDown} color={currentAnswer?.like === false ? `red`: `black`} />
-					<IoIosThumbsUp onClick={handleThumbsUp} color={currentAnswer?.like ? `green`: `black`} />
+				<div className="mt-3 flex flex-row gap-x-2 justify-between">
+					<div>
+						<h1 className="text-2xl bold mb-3">{quizName}</h1>
+						<h1 className="text-xl bold mb-3">{questionNumber} of {questions.length}</h1>
+					</div>
+					<CountdownCircleTimer
+						size={70}
+						isPlaying={!hasAnswered}
+						key={key}
+						duration={15}
+						colors={[ '#F7B801', '#A30000', '#A30000']}
+						colorsTime={[10, 5, 0]}
+					>
+							{renderTime}
+					</CountdownCircleTimer>
 				</div>
 				{questions.length > 0 && 
-					<div className="bg-blue-50 rounded-lg p-2">
+					<div className="border-4 rounded-lg p-4 border-blue-300">
 						<div className="mt-3 flex flex-row gap-x-2">
 							<h3 className="flex-auto">{questions[questionNumber - 1].question}</h3>
 						</div>
@@ -160,18 +179,21 @@ const ScaleInScience = () => {
 								<Button className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 ${borderColorClassBtn4} p-1.5`} onClick={(() => handleClickAnswer(4))}>{questions[questionNumber - 1].answer4}</Button>
 							</div>
 						}
-						{ hasAnswered && <>
-							<div className="mt-3 flex flex-row gap-x-2 justify-center items-center mt-10 italic">
+						{ hasAnswered && questions[questionNumber -1].additionalInfo &&
+							<div className="mt-3 flex flex-row gap-x-2 justify-center items-center mt-10 italic bg-blue-50 p-2 rounded-lg">
 						{ questions[questionNumber -1].additionalInfo}	
-						</div>
+							</div>
+						}
+						{ hasAnswered && 
 						<div className="mt-3 flex flex-row gap-x-2 justify-center items-center mt-10" >
-							<Button className="text-white bg-blue-700 rounded-lg border-4 border-blue-800 p-2 font-bold" color="white" onClick={handleNextQuestion}>{questionNumber < questions.length ? `Next question` : `See results`}</Button>
+							<Button className="text-white bg-blue-500 rounded-lg border-4 border-blue-700 p-2 font-bold" color="white" onClick={handleNextQuestion}>{questionNumber < questions.length ? `Next question` : `See results`}</Button>
 						</div>
-						</>}
+						}
 
 					</div>
 				}
 			</Layout>);
+
 		} else {
 			return (
 				<Layout>
@@ -179,8 +201,8 @@ const ScaleInScience = () => {
 						quizName={quizName} 
 						numberCorrect={answers.filter((item) => item.isCorrect).length} 
 						totalQuestions={answers.length} 
-						quizRoute="/scale-in-science"
-						answers={answers} questions={questions}>
+						onClick={onRestart}
+						>
 						</Results>
 				</Layout>
 			)
@@ -193,4 +215,4 @@ const ScaleInScience = () => {
 
 };
 
-export default ScaleInScience;
+export default StandardQuiz;

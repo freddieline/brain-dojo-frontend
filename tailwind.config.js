@@ -8,6 +8,7 @@ export default {
     "./index.html",
     "./src/**/*.{html,js,ts,tsx}"
   ],
+  darkMode: false, 
   theme: {
     extend: {},
   },

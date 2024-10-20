@@ -65,7 +65,7 @@ const CapitalsQuiz:React.FC<InputProps> = ({continent}) => {
 
 
 	if(showResults){
-		return <Results totalQuestions={10} numberCorrect={numberComplete} quizName={quizName} quizRoute="/capitals"></Results>
+		return <Results totalQuestions={10} numberCorrect={numberComplete} quizName={quizName} onClick={()=>{}}></Results>
 	}
 
 	if(data && data.length > 0) {

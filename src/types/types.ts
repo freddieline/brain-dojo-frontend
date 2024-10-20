@@ -27,6 +27,9 @@ export type CapitalQuestion = {
 export interface Answer {
 	question: number;
 	guess?: number;
-	like?: boolean;
 	isCorrect?: boolean;
+}
+
+export interface Level {
+  [minPercentage: number]: number
 }
