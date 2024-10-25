@@ -14,7 +14,7 @@ const SequenceTile: React.FC<InputProps> =({id, src, show, highlight, animate, i
   const hiddenClass = show ? "is-flipped ": "";
   const highlightClass = highlight ? "highlight ": "";
   const animateClass = animate ? "animate " : "";
-  const wrongClass = incorrectlyGuessed ? "wrong" : "	border: 4px solid ;";
+  const wrongClass = incorrectlyGuessed ? "wrong" : "";
   const darkenedClass = incorrectlyGuessed ? "absolute inset-0 bg-black bg-opacity-50 pointer-events-none" : "";
 
   return <div key={id} className={"flip-card w-110 mr-2 mb-2 "+ hiddenClass + animateClass}>
