@@ -30,7 +30,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
   });
 
 
-	const renderTime = ({ remainingTime  }: { remainingTime: number }) => {
+	const renderTime = ({ remainingTime }: { remainingTime: number }) => {
 		if (remainingTime === 0) {
 			if(!answers[questionNumber -1]){
 				console.log("aaa");

@@ -4,22 +4,15 @@ import Layout from '../layout/Layout';
 const Home = () => {
 	return (
 		<Layout>
-			<h1 className="text-[40px] font-bold mb-6 text-center leckerli-one-regular text-blue-800">Fred's quiz</h1>
+			<h1 className="text-[50px] font-bold mb-6 text-center knewave-regular text-black">Brain Dojo</h1>
 
-			<div className={`w-[100%] overflow-hidden shadow-lg`}>
-      	<img src="readingbook.png" alt="Tower of Babel" />
+			<div className={`w-[100%] overflow-hidden`}>
+      	<img src="brain.png" alt="Logo" />
     	</div>
-			<p className="text-lg  mt-5 mb-5">Do you love learning new bits of knowledge? If so I hope you enjoy the quizzes and take something away with you :-)</p>
-			{/* <p className="text-lg  mt-5 mb-5">Please leave some feedback at the end too. This will really help me in making the quizzes better.</p> */}
-			<Link className="w-48" to="/greek-mythology">
-				<h3 className="text-lg underline">Greek mythology (medium)</h3>
+			<Link className="w-48" to="/memory-game">
+				<h3 className="text-xl underline mt-6">Memory game</h3>
 			</Link>
-			<Link className="w-48 underline" to="/scale-in-science">
-				<h3 className="text-lg underline">Scale in Science (medium)</h3>
-			</Link>
-			{/* <Link className="w-48 underline" to="/capitals">
-				<h3 className="text-lg underline">Capital cities (hard)</h3>
-			</Link> */}
+			<h3 className="text-md">Images <a href="http://www.freepik.com">designed by brgfx / Freepik</a></h3>
 		</Layout>
 	);
 };
