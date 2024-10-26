@@ -37,13 +37,24 @@ const MemoryGame = () => {
   const [ sequenceAnimals, setSequenceAnimals ] = useState<SequenceItem[]>([]);
   const [ selectable, setSelectable ] = useState<SelectItem[]>([]);
   const [ currentIndex, setCurrentIndex] = useState<number>(0);
-  const [ sequenceLength ] = useState<number>(6);
+  const [ sequenceLength, setSequenceLength ] = useState<number>(6);
   const [ gameState, setGameState ] = useState<GameState>(GameState.PreGame);
-  const [ timeToMemorize ] = useState<number>(7);
+  const [ timeToMemorize, setTimeToMemorize ] = useState<number>(10);
   const navigate = useNavigate();
 
-  const handleStart = () => {
+  const renderTime = ({ remainingTime  }: { remainingTime: number }) => {
+		return remainingTime;
+	};
+
+  const handleStart = (sequenceLength: number) => {
+    if(sequenceLength === 8){
+      setTimeToMemorize(14);
+    }
+    if(sequenceLength == 4){
+      setTimeToMemorize(6)
+    }
     setCurrentIndex(0);
+    setSequenceLength(sequenceLength);
     setGameState(GameState.Start);
   }
   const gotoMainMenu = () => {
@@ -232,10 +243,11 @@ const MemoryGame = () => {
         <CountdownCircleTimer
             size={70}
             isPlaying={gameState == GameState.Memorize}
-            duration={7}
+            duration={timeToMemorize}
             colors={[ '#F7B801', '#A30000', '#A30000']}
             colorsTime={[4, 2, 0]}
           >
+            {renderTime}
         </CountdownCircleTimer> 
       </div>
       }
@@ -268,18 +280,12 @@ const MemoryGame = () => {
             {gameState == GameState.PreGame && 
               <div id="modal" className="modal">
                 <div className="flex flex-col items-center justify-center h-screen gap-5">
-                  <Button size="lg" color="purple" onClick={handleStart} pill>Play</Button>
+                  <Button size="lg" color="purple" onClick={()=>handleStart(4)} pill>4 images</Button>
+                  <Button size="lg" color="purple" onClick={()=>handleStart(6)} pill>6 images</Button>
+                  <Button size="lg" color="purple" onClick={()=>handleStart(8)} pill>8 images</Button>
                   <Button size="lg" color="light" onClick={gotoMainMenu} pill>Main menu</Button>
                 </div>
               </div>
-            }
-            {gameState == GameState.Settings && 
-            <div id="modal" className="modal">
-              <div className="flex flex-col items-center justify-center h-screen gap-5">
-                <Button size="lg" color="purple" onClick={handleStart} pill>Play</Button>
-                <Button size="lg" color="light" onClick={gotoMainMenu} pill>Main menu</Button>
-              </div>
-            </div>
             }
       { getContent() }
       </> :
