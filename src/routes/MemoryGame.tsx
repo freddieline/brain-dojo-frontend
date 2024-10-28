@@ -218,7 +218,7 @@ const MemoryGame = () => {
     return <>
       <h1 className="text-xl font-bold">Memorise!</h1>
       <div className="flex flex-row align-center flex-wrap ml-auto mr-auto mt-3">
-        { gameState != GameState.PreGame && sequenceAnimals.map((item, index) => {
+        { gameState != GameState.PreGame && gameState != GameState.HowToPlay && sequenceAnimals.map((item, index) => {
             return <SequenceTile 
                     id={item.animal}
                     src={`animals/`+item.animal+`.jpeg`} 
@@ -231,7 +231,7 @@ const MemoryGame = () => {
         })}
         </div>
       <div className="flex flex-row align-center flex-wrap ml-auto mr-auto mt-4">
-        { gameState != GameState.PreGame && selectable.map((item) => {
+        { gameState != GameState.PreGame && gameState != GameState.HowToPlay && selectable.map((item) => {
             return <SelectableTile 
                     id={item.animal}
                     src={`animals/${item.animal}.jpeg`} 
