@@ -26,4 +26,4 @@ export interface Level {
   [minPercentage: number]: number
 }
 
-export const animals = ['beaver', 'cheetah', 'cricket', 'crocodile', 'hen', 'kanga', 'ladybird', 'lion', 'parrot', 'pelican', 'pig', 'snail', 'rabbit', 'tortoise', 'turtle', 'wolf'];
+export const animals = ['beaver', 'cheetah', 'cricket', 'crocodile', 'hen', 'kanga', 'ladybird', 'lion', 'parrot', 'pelican', 'pig', 'snail', 'rabbit', 'tortoise', 'wolf'];
