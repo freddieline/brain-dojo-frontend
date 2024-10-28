@@ -293,10 +293,10 @@ const MemoryGame = () => {
             }
             {gameState == GameState.HowToPlay && 
               <div id="modal" className="modal">
-                <div className="flex flex-col items-center justify-center h-screen gap-5 w-[50%] h-[200px] mr-auto ml-auto">
-                  <div className="h-[250px] bg-white text-center p-8 rounded-lg">
-                  Select each animal that appears in the top grid in the correct order
-                  <Button size="lg" className="ml-auto mr-auto mt-5" color="purple" onClick={()=>handleStart()} pill>Start</Button>
+                <div className="flex flex-col items-center justify-center h-screen gap-5 max-w-[350px] mr-auto ml-auto">
+                  <div className="h-[200px] flex flex-col bg-white text-center p-8 rounded-lg flex flex-col justify-center space-around items-center">
+                  <div>Select each animal that appears in the top grid in the correct order</div>
+                  <Button size="lg" className="ml-auto mr-auto mt-6" color="purple" onClick={()=>handleStart()} pill>Start</Button>
                   </div>
                 </div>
               </div>
