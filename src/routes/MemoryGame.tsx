@@ -25,7 +25,7 @@ type SelectItem = {
 
 enum GameState {
   PreGame = 'pre-game',
-  Settings = 'settings',
+  HowToPlay = 'how-to-play',
   Start = 'start',
   Memorize = 'memorize',
   Play = 'play',
@@ -46,7 +46,11 @@ const MemoryGame = () => {
 		return remainingTime;
 	};
 
-  const handleStart = (sequenceLength: number) => {
+  const handleStart = () => {
+    setGameState(GameState.Start);
+  }
+
+  const handleInitialize = (sequenceLength: number) => {
     if(sequenceLength === 8){
       setTimeToMemorize(14);
     }
@@ -55,8 +59,9 @@ const MemoryGame = () => {
     }
     setCurrentIndex(0);
     setSequenceLength(sequenceLength);
-    setGameState(GameState.Start);
+    setGameState(GameState.HowToPlay);
   }
+
   const gotoMainMenu = () => {
     navigate('/');
   }
@@ -226,7 +231,6 @@ const MemoryGame = () => {
         })}
         </div>
       <div className="flex flex-row align-center flex-wrap ml-auto mr-auto mt-4">
-        
         { gameState != GameState.PreGame && selectable.map((item) => {
             return <SelectableTile 
                     id={item.animal}
@@ -256,7 +260,7 @@ const MemoryGame = () => {
 
   return (<Layout>
     {
-      (gameState == GameState.PreGame || gameState == GameState.Lost || gameState == GameState.Won || gameState == GameState.Settings) ? <>
+      (gameState == GameState.PreGame || gameState == GameState.Lost || gameState == GameState.Won || gameState == GameState.HowToPlay) ? <>
 
             {gameState == GameState.Won && 
               <div className="modal-plain">
@@ -280,10 +284,20 @@ const MemoryGame = () => {
             {gameState == GameState.PreGame && 
               <div id="modal" className="modal">
                 <div className="flex flex-col items-center justify-center h-screen gap-5">
-                  <Button size="lg" color="purple" onClick={()=>handleStart(4)} pill>4 images</Button>
-                  <Button size="lg" color="purple" onClick={()=>handleStart(6)} pill>6 images</Button>
-                  <Button size="lg" color="purple" onClick={()=>handleStart(8)} pill>8 images</Button>
+                  <Button size="lg" color="purple" onClick={()=>handleInitialize(4)} pill>4 images</Button>
+                  <Button size="lg" color="purple" onClick={()=>handleInitialize(6)} pill>6 images</Button>
+                  <Button size="lg" color="purple" onClick={()=>handleInitialize(8)} pill>8 images</Button>
                   <Button size="lg" color="light" onClick={gotoMainMenu} pill>Main menu</Button>
+                </div>
+              </div>
+            }
+            {gameState == GameState.HowToPlay && 
+              <div id="modal" className="modal">
+                <div className="flex flex-col items-center justify-center h-screen gap-5 w-[50%] h-[200px] mr-auto ml-auto">
+                  <div className="h-[250px] bg-white text-center p-8 rounded-lg">
+                  Select each animal that appears in the top grid in the correct order
+                  <Button size="lg" className="ml-auto mr-auto mt-5" color="purple" onClick={()=>handleStart()} pill>Start</Button>
+                  </div>
                 </div>
               </div>
             }

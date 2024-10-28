@@ -196,3 +196,9 @@ body{
   border-radius: 90px;
   background-color: white;
 }
+
+.young-serif-regular {
+  font-family: "Young Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
