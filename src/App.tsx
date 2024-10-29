@@ -1,8 +1,8 @@
 import "./App.css";
 import "./output.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./routes/Home";
-import MemoryGame from "./routes/MemoryGame";
+import Home from "./games/Home";
+import MemoryGame from "./games/MemoryGame";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
