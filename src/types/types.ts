@@ -20,3 +20,9 @@ export enum GameState {
   Won,
   Lost,
 }
+
+export interface Answer {
+	question: number;
+	guess?: number;
+	isCorrect?: boolean;
+}
