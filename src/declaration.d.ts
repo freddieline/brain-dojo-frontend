@@ -1,1 +1,1 @@
-declare module 'react-thermometer-component';
+declare module "react-thermometer-component";

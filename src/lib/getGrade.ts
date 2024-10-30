@@ -1,5 +1,5 @@
-export function getScore(percentageScore: number) : number {
-  switch(true) {
+export function getScore(percentageScore: number): number {
+  switch (true) {
     case percentageScore >= 90:
       return 1;
     case percentageScore >= 80:
@@ -15,53 +15,48 @@ export function getScore(percentageScore: number) : number {
   }
 }
 
-export function getEmoji(score:number): string {
-
-  switch(score){
+export function getEmoji(score: number): string {
+  switch (score) {
     case 1:
       // double fire
-      return "🔥🔥"
+      return "🔥🔥";
     case 2:
       // chilli pepper
-      return "🌶️"
+      return "🌶️";
     case 3:
       // fire
-      return "🔥"
+      return "🔥";
     case 4:
       // Sun
-      return "☀️"
+      return "☀️";
     case 5:
       // Sun behind cloud
-      return "🌤️"
+      return "🌤️";
     default:
       // ice cube
-      return "🧊"
+      return "🧊";
   }
- }
+}
 
- export function getMotivation(score:number): string {
-
-  switch(score){
+export function getMotivation(score: number): string {
+  switch (score) {
     case 1:
       // double fire
-      return "Super hot!"
+      return "Super hot!";
     case 2:
       // chilli pepper
-      return "Spicy!"
+      return "Spicy!";
     case 3:
       // fire
-      return "Awesome!"
+      return "Awesome!";
     case 4:
       // Sun
-      return "Good work!"
+      return "Good work!";
     case 5:
       // Sun behind cloud
-      return "Not bad."
+      return "Not bad.";
     default:
       // ice cube
-      return "Oh no!"
+      return "Oh no!";
   }
- }
-
-
-
+}
