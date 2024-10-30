@@ -90,7 +90,7 @@ const MemoryGame = () => {
               <div className={MODAL_CONTENT_CLASSES}>
                 <div className="items-center w-[250px] h-[200px] p-8 rounded-lg bg-white text-center">
                   <div>
-                    Select the animals that appears in the top grid in the
+                    Select the animals that appear in the top grid in the
                     correct order
                   </div>
                   <Button
