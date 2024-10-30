@@ -42,3 +42,5 @@ export interface Answer {
   guess?: number;
   isCorrect?: boolean;
 }
+
+export type SequenceLength = 4 | 6 | 8;

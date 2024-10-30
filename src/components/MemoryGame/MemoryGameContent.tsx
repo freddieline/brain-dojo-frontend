@@ -1,6 +1,6 @@
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import SequenceTile from "../SequenceTile";
-import SelectableTile from "../SelectableTile";
+import SequenceTile from "./SequenceTile";
+import SelectableTile from "./SelectableTile";
 import { SelectItem, SequenceItem, GameState } from "../../types/types";
 import { ImCross } from "react-icons/im";
 import { TiTick } from "react-icons/ti";
