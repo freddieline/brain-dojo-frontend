@@ -19,8 +19,8 @@ const MemoryGame = () => {
     gameState,
     timeToMemorize,
     currentIndex,
-    handleInitialize,
-    handleStart,
+    setupGame,
+    start,
     handleSelection,
   } = useMemoryGameState();
 
@@ -58,7 +58,7 @@ const MemoryGame = () => {
                 <Button
                   size="lg"
                   color="purple"
-                  onClick={() => handleInitialize(4)}
+                  onClick={() => setupGame(4)}
                   pill
                 >
                   4 images
@@ -66,7 +66,7 @@ const MemoryGame = () => {
                 <Button
                   size="lg"
                   color="purple"
-                  onClick={() => handleInitialize(6)}
+                  onClick={() => setupGame(6)}
                   pill
                 >
                   6 images
@@ -74,7 +74,7 @@ const MemoryGame = () => {
                 <Button
                   size="lg"
                   color="purple"
-                  onClick={() => handleInitialize(8)}
+                  onClick={() => setupGame(8)}
                   pill
                 >
                   8 images
@@ -88,11 +88,7 @@ const MemoryGame = () => {
           {gameState == GameState.HowToPlay && (
             <div id="modal" className="modal">
               <div className={MODAL_CONTENT_CLASSES}>
-                <div
-                  className={
-                    "items-center w-[250px] h-[200px] p-8 rounded-lg bg-white text-center"
-                  }
-                >
+                <div className="items-center w-[250px] h-[200px] p-8 rounded-lg bg-white text-center">
                   <div>
                     Select the animals that appears in the top grid in the
                     correct order
@@ -101,7 +97,7 @@ const MemoryGame = () => {
                     size="lg"
                     className="ml-auto mr-auto mt-6"
                     color="purple"
-                    onClick={() => handleStart()}
+                    onClick={() => start()}
                     pill
                   >
                     Start

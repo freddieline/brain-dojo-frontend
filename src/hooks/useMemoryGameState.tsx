@@ -19,7 +19,14 @@ export const useMemoryGameState = () => {
   const [gameState, setGameState] = useState<GameState>(GameState.PreGame);
   const [timeToMemorize, setTimeToMemorize] = useState<number>(10);
 
-  const handleStart = () => {
+  const setupGame = (sequenceLength: SequenceLength) => {
+    setTimeToMemorize(gameConfig[sequenceLength].time);
+    setCurrentIndex(0);
+    setSequenceLength(sequenceLength);
+    setGameState(GameState.HowToPlay);
+  };
+
+  const start = () => {
     setGameState(GameState.Start);
   };
 
@@ -69,13 +76,6 @@ export const useMemoryGameState = () => {
     setGameState(GameState.Memorize);
   }
 
-  const handleInitialize = (sequenceLength: SequenceLength) => {
-    setTimeToMemorize(gameConfig[sequenceLength].time);
-    setCurrentIndex(0);
-    setSequenceLength(sequenceLength);
-    setGameState(GameState.HowToPlay);
-  };
-
   function revealSequence() {
     setSequenceItems((prevItems) =>
       prevItems.map((item) => ({ ...item, show: true })),
@@ -87,28 +87,6 @@ export const useMemoryGameState = () => {
       );
       setGameState(GameState.Play);
     }, 1000 * timeToMemorize);
-  }
-
-  function updateCardDisplay(
-    index: number,
-    options: { show?: boolean; isWrong?: boolean } = {},
-  ) {
-    setSequenceItems((prevItems) =>
-      prevItems.map((item, idx) =>
-        idx === index ? { ...item, ...options } : item,
-      ),
-    );
-  }
-
-  function shuffleSelectableItems() {
-    setSelectable(() => {
-      const nextAnimal = sequenceItems[currentIndex].animal;
-      let selectableAnimalsNew = randomSelection(animals, 3, [nextAnimal]);
-      selectableAnimalsNew.splice(Math.floor(Math.random() * 3), 0, nextAnimal);
-      return selectableAnimalsNew.map((item) => {
-        return { animal: item, selected: false };
-      });
-    });
   }
 
   const handleSelection = (animal: string) => {
@@ -133,14 +111,36 @@ export const useMemoryGameState = () => {
     }
   };
 
+  function updateCardDisplay(
+    index: number,
+    options: { show?: boolean; isWrong?: boolean } = {},
+  ) {
+    setSequenceItems((prevItems) =>
+      prevItems.map((item, idx) =>
+        idx === index ? { ...item, ...options } : item,
+      ),
+    );
+  }
+
+  function shuffleSelectableItems() {
+    setSelectable(() => {
+      const nextAnimal = sequenceItems[currentIndex].animal;
+      let selectableAnimalsNew = randomSelection(animals, 3, [nextAnimal]);
+      selectableAnimalsNew.splice(Math.floor(Math.random() * 3), 0, nextAnimal);
+      return selectableAnimalsNew.map((item) => {
+        return { animal: item, selected: false };
+      });
+    });
+  }
+
   return {
     sequenceItems,
     selectableItems,
     currentIndex,
     gameState,
     timeToMemorize,
-    handleInitialize,
+    setupGame,
+    start,
     handleSelection,
-    handleStart,
   };
 };
