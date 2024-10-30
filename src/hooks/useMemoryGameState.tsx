@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { SequenceItem, SelectItem, GameState } from "../types/types";
 import { randomSelection } from "../lib/randomSelection";
 import { animals } from "../types/types";
-
-type SequenceLength = 4 | 6 | 8;
+import { SequenceLength } from "../types/types";
 
 const gameConfig: Record<SequenceLength, { time: number }> = {
   4: { time: 6 },

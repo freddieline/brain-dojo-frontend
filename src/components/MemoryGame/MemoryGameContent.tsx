@@ -1,7 +1,10 @@
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import SequenceTile from "../../components/SequenceTile";
-import SelectableTile from "../../components/SelectableTile";
+import SequenceTile from "../SequenceTile";
+import SelectableTile from "../SelectableTile";
 import { SelectItem, SequenceItem, GameState } from "../../types/types";
+import { ImCross } from "react-icons/im";
+import { TiTick } from "react-icons/ti";
+import ConfettiExplosion from "react-confetti-explosion";
 
 interface InputProps {
   selectableItems: SelectItem[];
@@ -23,6 +26,9 @@ const MemoryGameContent: React.FC<InputProps> = ({
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     return remainingTime;
   };
+
+  const MODAL_CONTENT_CLASSES =
+    "flex flex-col items-center justify-center h-screen gap-5";
 
   return (
     <>
@@ -67,6 +73,26 @@ const MemoryGameContent: React.FC<InputProps> = ({
           >
             {renderTime}
           </CountdownCircleTimer>
+        </div>
+      )}
+      {gameState == GameState.Won && (
+        <div className="modal-plain">
+          <div className={MODAL_CONTENT_CLASSES}>
+            <ConfettiExplosion
+              duration={8000}
+              force={0.8}
+              height={"100vh"}
+              className=""
+            />
+            <TiTick color="#32a852" size={200}></TiTick>
+          </div>
+        </div>
+      )}
+      {gameState == GameState.Lost && (
+        <div className="modal-plain">
+          <div className={MODAL_CONTENT_CLASSES}>
+            <ImCross color="#ff2d2d" size={150}></ImCross>
+          </div>
         </div>
       )}
     </>
