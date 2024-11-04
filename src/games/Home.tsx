@@ -12,11 +12,15 @@ const Home = () => {
         <img src="brain.png" alt="Logo" />
       </div>
       <Link className="w-48" to="/memory-game">
-        <h3 className="text-xl underline mt-6">Memory game</h3>
+        <h3 className="text-xl underline mt-6">Memorise!</h3>
       </Link>
       <h3 className="text-md">
         Images <a href="http://www.freepik.com">designed by brgfx / Freepik</a>
       </h3>
+
+      <Link className="w-48" to="/numerical-reasoning">
+        <h3 className="text-xl underline mt-6">Numerise!</h3>
+      </Link>
     </Layout>
   );
 };
