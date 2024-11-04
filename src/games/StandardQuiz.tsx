@@ -156,7 +156,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
 						size={70}
 						isPlaying={!hasAnswered}
 						key={key}
-						duration={6}
+						duration={8}
 						colors={[ '#F7B801', '#A30000', '#A30000']}
 						colorsTime={[10, 5, 0]}
 					>
