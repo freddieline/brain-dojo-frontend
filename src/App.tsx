@@ -21,10 +21,7 @@ function App() {
               path="/numerical-reasoning"
               element={<StandardQuiz quizName="Numerical reasoning" />}
             />
-            <Route
-              path="/association-recall"
-              element={<MemoriseCapital />}
-            />
+            <Route path="/association-recall" element={<MemoriseCapital />} />
           </Routes>
         </Router>
       </div>

@@ -17,12 +17,11 @@ export const animals = [
 ];
 
 export type CapitalQuestion = {
-	capital: string;
-	country: string;
-	showAnswer?: boolean;
+  capital: string;
+  country: string;
+  showAnswer?: boolean;
   isCorrect?: boolean;
 };
-
 
 export type SequenceItem = {
   animal: string;
@@ -50,7 +49,7 @@ export enum PairsRecallGameState {
   Play,
   Correct,
   Incorrect,
-  Finish
+  Finish,
 }
 
 export interface Answer {
