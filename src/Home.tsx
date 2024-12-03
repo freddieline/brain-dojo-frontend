@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import Layout from "./layout/Layout";
+import { Size } from './types/types'
 
 const Home = () => {
   return (
-    <Layout width="250">
+    <Layout size={Size.small}>
       <h1 className="text-[50px] font-bold mb-6 text-center knewave-regular text-black">
         Brain Dojo
       </h1>

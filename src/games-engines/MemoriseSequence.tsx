@@ -3,10 +3,13 @@ import MemoryGameMenu from "../components/MemoryGame/MemoryGameMenu";
 
 import MemoryGameContent from "../components/MemoryGame/MemoryGameContent";
 import { useMemoryGameState } from "../hooks/useMemoryGameState";
+import { Size } from "../types/types";
 
-const MemoryGame = () => {
+const MemoriseSequence = () => {
+
   const {
     sequenceItems,
+    sequenceLength,
     selectableItems,
     gameState,
     timeToMemorize,
@@ -16,15 +19,17 @@ const MemoryGame = () => {
     handleSelection,
   } = useMemoryGameState();
 
+  console.log(sequenceLength);
+
   return (
-    <Layout>
+    <Layout size={Size.small}>
       {
         <>
           <MemoryGameMenu
             setupGame={setupGame}
             start={start}
             gameState={gameState}
-            sequenceItems={sequenceItems}
+            sequenceLength={sequenceLength}
           ></MemoryGameMenu>
           <MemoryGameContent
             sequenceItems={sequenceItems}
@@ -40,4 +45,4 @@ const MemoryGame = () => {
   );
 };
 
-export default MemoryGame;
+export default MemoriseSequence;

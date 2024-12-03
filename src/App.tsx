@@ -2,7 +2,7 @@ import "./App.css";
 import "./output.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import MemoryGame from "./games-engines/MemoryGame";
+import MemoriseSequence from "./games-engines/MemoriseSequence";
 import StandardQuiz from "./games-engines/StandardQuiz";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoriseCapital } from "./games/MemorizeCapitals";
@@ -16,7 +16,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/sequence-recall" element={<MemoryGame />} />
+            <Route path="/sequence-recall" element={<MemoriseSequence />} />
             <Route
               path="/numerical-reasoning"
               element={<StandardQuiz quizName="Numerical reasoning" />}

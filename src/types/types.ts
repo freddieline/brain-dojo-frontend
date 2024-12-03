@@ -57,3 +57,9 @@ export interface Answer {
   guess?: number;
   isCorrect?: boolean;
 }
+
+export enum Size {
+  small, 
+  medium,
+  large
+}

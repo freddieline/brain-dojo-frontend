@@ -60,12 +60,6 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
       setKey(key + 1);
     };
 
-    function onRestart() {
-      setQuizFinished(false);
-      setQuestionNumber(1);
-      setAnswers([]);
-    }
-
     const handleClickAnswer = (answer: number) => {
       if (answers) {
         if (!answers[questionNumber - 1]) {
@@ -225,7 +219,6 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
             quizName={quizName}
             numberCorrect={answers.filter((item) => item.isCorrect).length}
             totalQuestions={answers.length}
-            onClick={onRestart}
           ></Results>
         </Layout>
       );

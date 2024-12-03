@@ -21,11 +21,12 @@ export const useMemoryGameState = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [sequenceLength, setSequenceLength] = useState<number>(4);
   const [gameState, setGameState] = useState<SequenceRecallGameState>(
-    SequenceRecallGameState.HowToPlay,
+    SequenceRecallGameState.PreGame,
   );
   const [timeToMemorize, setTimeToMemorize] = useState<number>(10);
 
-  const setupGame = () => {
+  const setupGame = (sequenceLength: number) => {
+    console.log("setupGame");
     if (!sequenceLength) {
       const sequenceLengthTemp: number = 4;
       setSequenceLength(sequenceLengthTemp);
@@ -34,6 +35,7 @@ export const useMemoryGameState = () => {
     setCurrentIndex(0);
     setSequenceLength(sequenceLength);
     setGameState(SequenceRecallGameState.HowToPlay);
+    console.log(sequenceLength)
   };
 
   const nextLevel = () => {
@@ -75,10 +77,12 @@ export const useMemoryGameState = () => {
   };
 
   function generateInitialCards() {
+    console.log('seefd gene')
     const sequenceItemsIni = randomSelection(animals, sequenceLength);
     let sequenceItemsInitialState = sequenceItemsIni.map((item) => {
       return { animal: item, show: false, isWrong: false };
     });
+    console.log(sequenceItemsInitialState);
     setSequenceItems(sequenceItemsInitialState);
     // make initial selectable items as random selection excluding the first sequence item
     let selectableAnimalsIni = randomSelection(animals, 3, [
@@ -156,6 +160,7 @@ export const useMemoryGameState = () => {
 
   return {
     sequenceItems,
+    sequenceLength,
     selectableItems,
     currentIndex,
     gameState,
