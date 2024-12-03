@@ -1,9 +1,6 @@
-const Layout: React.FC<any> = ({ children }) => {
-  return (
-    <div className="max-w-[500px] m-auto mt-4 rounded-lg w-[255px]">
-      {children}
-    </div>
-  );
+const Layout: React.FC<any> = ({ width = "600", children }) => {
+  const className = `mt-4 rounded-lg w-[${width}px] m-auto`;
+  return <div className={className}>{children}</div>;
 };
 
 export default Layout;

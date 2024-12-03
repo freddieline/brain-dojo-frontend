@@ -24,6 +24,7 @@ const MemoryGame = () => {
             setupGame={setupGame}
             start={start}
             gameState={gameState}
+            sequenceItems={sequenceItems}
           ></MemoryGameMenu>
           <MemoryGameContent
             sequenceItems={sequenceItems}
