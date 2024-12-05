@@ -1,55 +1,40 @@
 import { useState, useEffect } from "react";
-import { CapitalQuestion, PairsRecallGameState, Size } from "../types/types";
+import { PairQuestion, PairsRecallGameState, Size } from "../types/types";
 import { HiCheckCircle } from "react-icons/hi";
 import { Button, TextInput } from "flowbite-react";
 import Results from "../components/Results";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { randomSelection } from "../lib/randomSelection";
-import { useQuery } from "@tanstack/react-query";
+
 import cx from "classnames";
 import React, { FormEvent } from "react";
 import Layout from "../layout/Layout";
 
 type InputProps = {
   recallInstruction: string;
-  apiUrl: string;
   title: string;
+  data: PairQuestion[];
 };
 
 export const AssociationRecall: React.FC<InputProps> = ({
   recallInstruction,
-  apiUrl,
   title,
+  data,
 }) => {
-  const url = import.meta.env["VITE_QUIZ_API"] + apiUrl;
-
-  const { isPending, error, data } = useQuery({
-    queryKey: ["repoData"],
-    queryFn: () => fetch(url).then((res) => res.json()),
-  });
-
   const [numberCorrect, setNumberCorrect] = useState<number>(0);
   const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [gameState, setGameState] = useState<PairsRecallGameState>(
     PairsRecallGameState.Memorize,
   );
-  const [capitals, setCapitals] = useState<CapitalQuestion[]>([]);
-  const capital = capitals[questionNumber - 1];
+  const [pairs, setPairs] = useState<PairQuestion[]>([]);
+  const pair = pairs[questionNumber - 1];
 
   useEffect(() => {
     if (data) {
-      const randomCapitals: CapitalQuestion[] = randomSelection(data.data, 10);
-      setCapitals(randomCapitals);
+      const randomPairs: PairQuestion[] = randomSelection(data, 10);
+      setPairs(randomPairs);
     }
   }, [data]);
-
-  if (isPending) {
-    return <p></p>;
-  }
-
-  if (error) {
-    return <p>Error ... {error.message}</p>;
-  }
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     if (remainingTime === 0) {
@@ -87,9 +72,9 @@ export const AssociationRecall: React.FC<InputProps> = ({
     const formData = new FormData(e.currentTarget);
     const answer = formData.get("text-input")?.toString();
 
-    if (capitals && answer) {
+    if (pairs && answer) {
       if (
-        capital.capital
+        pair.value
           .toLowerCase()
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
@@ -107,7 +92,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
     }
   }
 
-  if (capitals.length > 0) {
+  if (pairs.length > 0) {
     return (
       <Layout size={Size.medium}>
         <h1 className="text-xl font-bold mb-4">{title}</h1>
@@ -127,15 +112,12 @@ export const AssociationRecall: React.FC<InputProps> = ({
                     {renderTime}
                   </CountdownCircleTimer>
                 </div>
-                {capitals &&
-                  capitals.map((capital) => {
+                {pairs &&
+                  pairs.map((pair) => {
                     return (
-                      <div
-                        key={capital.capital}
-                        className="flex flex-row flex-wrap"
-                      >
-                        <div className="w-[130px] mt-2">{capital.country}</div>
-                        <div className="w-[130px] mt-2">{capital.capital}</div>
+                      <div key={pair.value} className="flex flex-row flex-wrap">
+                        <div className="w-[130px] mt-2">{pair.key}</div>
+                        <div className="w-[130px] mt-2">{pair.value}</div>
                       </div>
                     );
                   })}
@@ -149,7 +131,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
                     key={questionNumber}
                     className="flex flex-row flex-wrap gap-2"
                   >
-                    <div className="w-[130px] mt-2">{capital.country}</div>
+                    <div className="w-[130px] mt-2">{pair.key}</div>
                     {gameState !== PairsRecallGameState.Incorrect && (
                       <TextInput
                         style={{
@@ -163,7 +145,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
                         type="text"
                         id="text-input"
                         name="text-input"
-                        autoFocus
+                        autoFocus={true}
                       ></TextInput>
                     )}
                     {gameState == PairsRecallGameState.Incorrect && (
@@ -174,11 +156,11 @@ export const AssociationRecall: React.FC<InputProps> = ({
                         }}
                         disabled={true}
                         id="text-input"
-                        value={capital.capital}
+                        value={pair.value}
                         autoFocus
                       ></TextInput>
                     )}
-                    {capital.isCorrect && (
+                    {pair.isCorrect && (
                       <HiCheckCircle
                         color="green"
                         size={30}
