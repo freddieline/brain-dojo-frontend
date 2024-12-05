@@ -36,7 +36,7 @@ const MemoryGameContent: React.FC<InputProps> = ({
 
   return (
     <>
-      <h1 className="text-xl font-bold">Memorise!</h1>
+      <h1 className="text-xl font-bold">Memorise the sequence</h1>
       <div className="flex flex-row align-center flex-wrap ml-auto mr-auto mt-3">
         {gameState >= SequenceRecallGameState.Start &&
           sequenceItems.map((item, index) => {
