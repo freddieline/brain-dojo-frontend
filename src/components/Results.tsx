@@ -54,6 +54,7 @@ const Results: React.FC<InputProps> = ({
             <Button
               type="submit"
               className="rounded-lg border-4 border-blue-700 p-2 font-bold text-gray bg-blue-500 text-white"
+              autoFocus
             >
               Main menu
             </Button>
