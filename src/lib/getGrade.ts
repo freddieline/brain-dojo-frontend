@@ -19,22 +19,22 @@ export function getEmoji(score: number): string {
   switch (score) {
     case 1:
       // double fire
-      return "🔥🔥";
+      return "A+";
     case 2:
       // chilli pepper
-      return "🌶️";
+      return "A";
     case 3:
       // fire
-      return "🔥";
+      return "B";
     case 4:
       // Sun
-      return "☀️";
+      return "C";
     case 5:
       // Sun behind cloud
-      return "🌤️";
+      return "D";
     default:
       // ice cube
-      return "🧊";
+      return "E";
   }
 }
 
@@ -45,7 +45,7 @@ export function getMotivation(score: number): string {
       return "Super hot!";
     case 2:
       // chilli pepper
-      return "Spicy!";
+      return "Excellent!";
     case 3:
       // fire
       return "Awesome!";

@@ -16,6 +16,13 @@ export const animals = [
   "wolf",
 ];
 
+export type CapitalQuestion = {
+  capital: string;
+  country: string;
+  showAnswer?: boolean;
+  isCorrect?: boolean;
+};
+
 export type SequenceItem = {
   animal: string;
   show: boolean;
@@ -27,7 +34,7 @@ export type SelectItem = {
   selected: boolean;
 };
 
-export enum GameState {
+export enum SequenceRecallGameState {
   PreGame,
   HowToPlay,
   Start,
@@ -37,10 +44,22 @@ export enum GameState {
   Lost,
 }
 
+export enum PairsRecallGameState {
+  Memorize,
+  Play,
+  Correct,
+  Incorrect,
+  Finish,
+}
+
 export interface Answer {
   question: number;
   guess?: number;
   isCorrect?: boolean;
 }
 
-export type SequenceLength = 4 | 6 | 8;
+export enum Size {
+  small,
+  medium,
+  large,
+}

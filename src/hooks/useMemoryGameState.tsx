@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
-import { SequenceItem, SelectItem, GameState } from "../types/types";
+import {
+  SequenceItem,
+  SelectItem,
+  SequenceRecallGameState,
+} from "../types/types";
 import { randomSelection } from "../lib/randomSelection";
 import { animals } from "../types/types";
-import { SequenceLength } from "../types/types";
 
-const gameConfig: Record<SequenceLength, { time: number }> = {
+const gameConfig: Record<number, { time: number }> = {
   4: { time: 6 },
+  5: { time: 8 },
   6: { time: 10 },
+  7: { time: 12 },
   8: { time: 14 },
 };
 
@@ -14,24 +19,37 @@ export const useMemoryGameState = () => {
   const [sequenceItems, setSequenceItems] = useState<SequenceItem[]>([]);
   const [selectableItems, setSelectable] = useState<SelectItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [sequenceLength, setSequenceLength] = useState<number>(6);
-  const [gameState, setGameState] = useState<GameState>(GameState.PreGame);
+  const [sequenceLength, setSequenceLength] = useState<number>(4);
+  const [gameState, setGameState] = useState<SequenceRecallGameState>(
+    SequenceRecallGameState.PreGame,
+  );
   const [timeToMemorize, setTimeToMemorize] = useState<number>(10);
 
-  const setupGame = (sequenceLength: SequenceLength) => {
+  const setupGame = (sequenceLength: number) => {
+    if (!sequenceLength) {
+      const sequenceLengthTemp: number = 4;
+      setSequenceLength(sequenceLengthTemp);
+    }
     setTimeToMemorize(gameConfig[sequenceLength].time);
     setCurrentIndex(0);
     setSequenceLength(sequenceLength);
-    setGameState(GameState.HowToPlay);
+    setGameState(SequenceRecallGameState.HowToPlay);
+  };
+
+  const nextLevel = () => {
+    if (sequenceLength != 8) {
+      const sequenceLengthTemp: number = sequenceLength + 1;
+      setSequenceLength(sequenceLengthTemp);
+    }
   };
 
   const start = () => {
-    setGameState(GameState.Start);
+    setGameState(SequenceRecallGameState.Start);
   };
 
   // update changes in user turns
   useEffect(() => {
-    if (gameState == GameState.Play) {
+    if (gameState == SequenceRecallGameState.Play) {
       updateCardDisplay(currentIndex - 1, { show: true });
       shuffleSelectableItems();
     }
@@ -40,15 +58,19 @@ export const useMemoryGameState = () => {
   useEffect(() => updateGameState(), [gameState]);
 
   const updateGameState = () => {
-    if (gameState === GameState.Start) generateInitialCards();
-    if (gameState === GameState.Memorize) revealSequence();
-    if (gameState === GameState.Play && currentIndex > 0)
+    if (gameState === SequenceRecallGameState.Start) generateInitialCards();
+    if (gameState === SequenceRecallGameState.Memorize) revealSequence();
+    if (gameState === SequenceRecallGameState.Play && currentIndex > 0)
       shuffleSelectableItems();
-    if (gameState === GameState.Won || gameState === GameState.Lost) {
-      setTimeout(
-        () => setGameState(GameState.PreGame),
-        gameState === GameState.Won ? 5000 : 3000,
-      );
+    if (gameState === SequenceRecallGameState.Won) {
+      setTimeout(() => setGameState(SequenceRecallGameState.HowToPlay), 5000);
+      if (sequenceItems.length != 8) {
+        nextLevel();
+      } else {
+      }
+    }
+    if (gameState === SequenceRecallGameState.Lost) {
+      setTimeout(() => setGameState(SequenceRecallGameState.HowToPlay), 3000);
     }
   };
 
@@ -72,7 +94,7 @@ export const useMemoryGameState = () => {
       return { animal: item, selected: false };
     });
     setSelectable(selectableAnimalsIniState);
-    setGameState(GameState.Memorize);
+    setGameState(SequenceRecallGameState.Memorize);
   }
 
   function revealSequence() {
@@ -84,7 +106,7 @@ export const useMemoryGameState = () => {
       setSequenceItems((prevItems) =>
         prevItems.map((item) => ({ ...item, show: false })),
       );
-      setGameState(GameState.Play);
+      setGameState(SequenceRecallGameState.Play);
     }, 1000 * timeToMemorize);
   }
 
@@ -102,11 +124,11 @@ export const useMemoryGameState = () => {
         setCurrentIndex((prev) => prev + 1);
       } else {
         updateCardDisplay(currentIndex, { show: true });
-        setGameState(GameState.Won);
+        setGameState(SequenceRecallGameState.Won);
       }
     } else {
       updateCardDisplay(currentIndex, { show: true, isWrong: true });
-      setGameState(GameState.Lost);
+      setGameState(SequenceRecallGameState.Lost);
     }
   };
 
@@ -134,6 +156,7 @@ export const useMemoryGameState = () => {
 
   return {
     sequenceItems,
+    sequenceLength,
     selectableItems,
     currentIndex,
     gameState,
@@ -141,5 +164,6 @@ export const useMemoryGameState = () => {
     setupGame,
     start,
     handleSelection,
+    nextLevel,
   };
 };
