@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "./layout/Layout";
-import { Size } from './types/types'
+import { Size } from "./types/types";
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
         Images <a href="http://www.freepik.com">designed by brgfx / Freepik</a>
       </h3>
       <Link className="w-48" to="/association-recall">
-        <h3 className="text-xl underline mt-6">Memorise the association</h3>
+        <h3 className="text-xl underline mt-6">Memorise the capital cities</h3>
       </Link>
       <Link className="w-48" to="/numerical-reasoning">
         <h3 className="text-xl underline mt-6">Numerical reasoning</h3>

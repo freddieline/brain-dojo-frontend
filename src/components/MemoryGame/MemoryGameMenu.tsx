@@ -1,5 +1,5 @@
 import { Button } from "flowbite-react";
-import { SequenceRecallGameState, } from "../../types/types";
+import { SequenceRecallGameState } from "../../types/types";
 
 interface InputProps {
   setupGame: (numberOfItems: number) => void;
@@ -19,7 +19,7 @@ const MemoryGameMenu: React.FC<InputProps> = ({
 
   return (
     <>
-      { gameState == SequenceRecallGameState.PreGame && (
+      {gameState == SequenceRecallGameState.PreGame && (
         <div id="modal" className="modal">
           <div className={MODAL_CONTENT_CLASSES}>
             <Button size="lg" color="purple" onClick={() => setupGame(4)} pill>
@@ -34,13 +34,13 @@ const MemoryGameMenu: React.FC<InputProps> = ({
           </div>
         </div>
       )}
-      { gameState == SequenceRecallGameState.HowToPlay && (
+      {gameState == SequenceRecallGameState.HowToPlay && (
         <div id="modal" className="modal">
           <div className={MODAL_CONTENT_CLASSES}>
             <div className="items-center w-[250px] h-[200px] p-8 rounded-lg bg-white text-center">
               <div>
-                Select the {sequenceLength} animals that appear in the top
-                grid in the correct order
+                Select the {sequenceLength} animals that appear in the top grid
+                in the correct order
               </div>
               <Button
                 size="lg"

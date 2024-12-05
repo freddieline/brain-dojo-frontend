@@ -1,11 +1,17 @@
 import { Size } from "../types/types";
 
-const Layout: React.FC<any> = ({ size, children } : {size:Size, children: any}) => {
+const Layout: React.FC<any> = ({
+  size,
+  children,
+}: {
+  size: Size;
+  children: any;
+}) => {
   let className;
   console.log(size);
-  if(size == Size.small){
+  if (size == Size.small) {
     className = `mt-4 rounded-lg w-[255px] m-auto`;
-  } else if(size == Size.medium){
+  } else if (size == Size.medium) {
     className = `mt-4 rounded-lg w-[400px] m-auto`;
   } else {
     className = `mt-4 rounded-lg w-[600px] m-auto`;

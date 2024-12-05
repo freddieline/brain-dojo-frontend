@@ -31,9 +31,6 @@ const MemoryGameContent: React.FC<InputProps> = ({
     return remainingTime;
   };
 
-
-  console.log(sequenceItems);
-
   const MODAL_CONTENT_CLASSES =
     "flex flex-col items-center justify-center h-screen gap-5";
 

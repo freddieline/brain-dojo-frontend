@@ -59,7 +59,7 @@ export interface Answer {
 }
 
 export enum Size {
-  small, 
+  small,
   medium,
-  large
+  large,
 }

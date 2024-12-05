@@ -6,7 +6,6 @@ import { useMemoryGameState } from "../hooks/useMemoryGameState";
 import { Size } from "../types/types";
 
 const MemoriseSequence = () => {
-
   const {
     sequenceItems,
     sequenceLength,
@@ -18,8 +17,6 @@ const MemoriseSequence = () => {
     start,
     handleSelection,
   } = useMemoryGameState();
-
-  console.log(sequenceLength);
 
   return (
     <Layout size={Size.small}>
