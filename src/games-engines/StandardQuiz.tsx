@@ -16,7 +16,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
 
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [questionNumber, setQuestionNumber] = useState<number>(1);
-  const [quizFinished, setQuizFinished] = useState<boolean>(true);
+  const [quizFinished, setQuizFinished] = useState<boolean>(false);
   const [key, setKey] = useState(0);
 
   const { isPending, error, data } = useQuery({
@@ -35,7 +35,14 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
         };
         setAnswers(newAnswers);
       }
-      return 0;
+      return (
+        <div
+          style={{ borderRadius: "35px" }}
+          className="bg-red-500 font-bold text-white p-3 w-[100px] h-[70px] text-center"
+        >
+          Time's up!
+        </div>
+      );
     }
     return remainingTime;
   };
@@ -146,7 +153,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
               size={70}
               isPlaying={!hasAnswered}
               key={key}
-              duration={8}
+              duration={10}
               colors={["#F7B801", "#A30000", "#A30000"]}
               colorsTime={[10, 5, 0]}
             >
@@ -164,6 +171,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
                 <Button
                   className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 ${borderColorClassBtn1} p-1.5`}
                   onClick={() => handleClickAnswer(1)}
+                  autoFocus
                 >
                   {questions[questionNumber - 1].answer1}
                 </Button>

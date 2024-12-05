@@ -22,7 +22,6 @@ export const AssociationRecall: React.FC<InputProps> = ({
   apiUrl,
   title,
 }) => {
-  
   const url = import.meta.env["VITE_QUIZ_API"] + apiUrl;
 
   const { isPending, error, data } = useQuery({
@@ -112,14 +111,13 @@ export const AssociationRecall: React.FC<InputProps> = ({
   if (capitals.length > 0) {
     return (
       <Layout size={Size.medium}>
-      <h1 className="text-xl font-bold mb-4">{title}</h1>
+        <h1 className="text-xl font-bold mb-4">{title}</h1>
         <div className="flex flex-col">
           <form onSubmit={handleSubmit}>
             {gameState == PairsRecallGameState.Memorize && (
               <>
                 <div>{recallInstruction}</div>
                 <div className="text-xl m-auto mt-5 mb-8">
-    
                   <CountdownCircleTimer
                     size={100}
                     isPlaying={gameState == PairsRecallGameState.Memorize}
@@ -148,7 +146,10 @@ export const AssociationRecall: React.FC<InputProps> = ({
               (gameState as PairsRecallGameState) !==
                 PairsRecallGameState.Finish && (
                 <>
-                  <div key={questionNumber} className="flex flex-row flex-wrap gap-2">
+                  <div
+                    key={questionNumber}
+                    className="flex flex-row flex-wrap gap-2"
+                  >
                     <div className="w-[130px] mt-2">{capital.country}</div>
                     {gameState !== PairsRecallGameState.Incorrect && (
                       <TextInput
