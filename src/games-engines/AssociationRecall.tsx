@@ -6,7 +6,7 @@ import Results from "../components/Results";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { randomSelection } from "../lib/randomSelection";
 import { useQuery } from "@tanstack/react-query";
-import cx from "classNames";
+import cx from "classnames";
 import React, { FormEvent } from "react";
 import Layout from "../layout/Layout";
 
