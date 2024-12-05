@@ -6,7 +6,6 @@ export const MemoriseCapital = () => {
       title="Capital cities"
       apiUrl="/api/capitals?continent=europe"
       recallInstruction="Memorise the capital cities"
-      playInstruction="Enter the capital city"
     ></AssociationRecall>
   );
 };

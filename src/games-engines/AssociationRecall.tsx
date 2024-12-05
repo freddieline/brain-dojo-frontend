@@ -12,7 +12,6 @@ import Layout from "../layout/Layout";
 
 type InputProps = {
   recallInstruction: string;
-  playInstruction: string;
   apiUrl: string;
   title: string;
 };
