@@ -23,6 +23,13 @@ export type CapitalQuestion = {
   isCorrect?: boolean;
 };
 
+export type PairQuestion = {
+  key: string;
+  value: string;
+  showAnswer?: boolean;
+  isCorrect?: boolean;
+};
+
 export type SequenceItem = {
   animal: string;
   show: boolean;

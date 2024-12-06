@@ -3,9 +3,9 @@ import {
   SequenceItem,
   SelectItem,
   SequenceRecallGameState,
-} from "../types/types";
-import { randomSelection } from "../lib/randomSelection";
-import { animals } from "../types/types";
+} from "../../types/types";
+import { randomSelection } from "../../lib/randomSelection";
+import { animals } from "../../types/types";
 
 const gameConfig: Record<number, { time: number }> = {
   4: { time: 6 },
@@ -15,7 +15,7 @@ const gameConfig: Record<number, { time: number }> = {
   8: { time: 14 },
 };
 
-export const useMemoryGameState = () => {
+export const useMemorySequenceGameState = () => {
   const [sequenceItems, setSequenceItems] = useState<SequenceItem[]>([]);
   const [selectableItems, setSelectable] = useState<SelectItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -63,6 +63,7 @@ export const useMemoryGameState = () => {
     if (gameState === SequenceRecallGameState.Play && currentIndex > 0)
       shuffleSelectableItems();
     if (gameState === SequenceRecallGameState.Won) {
+      setCurrentIndex(0);
       setTimeout(() => setGameState(SequenceRecallGameState.HowToPlay), 5000);
       if (sequenceItems.length != 8) {
         nextLevel();
@@ -70,6 +71,7 @@ export const useMemoryGameState = () => {
       }
     }
     if (gameState === SequenceRecallGameState.Lost) {
+      setCurrentIndex(0);
       setTimeout(() => setGameState(SequenceRecallGameState.HowToPlay), 3000);
     }
   };

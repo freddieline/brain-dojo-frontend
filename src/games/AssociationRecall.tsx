@@ -1,48 +1,60 @@
-import { useState, useEffect } from "react";
 import { PairQuestion, PairsRecallGameState, Size } from "../types/types";
 import { HiCheckCircle } from "react-icons/hi";
 import { Button, TextInput } from "flowbite-react";
 import Results from "../components/Results";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { randomSelection } from "../lib/randomSelection";
-
+import React from "react";
 import cx from "classnames";
-import React, { FormEvent } from "react";
 import Layout from "../layout/Layout";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useAssociationRecallState } from "../hooks/game-state/useAssociationRecallState";
+import { useFetchCountryCapitalPairs } from "../hooks/data-fetch/useFetchCountryCapitalPairs";
 
 type InputProps = {
   recallInstruction: string;
   title: string;
-  data: PairQuestion[];
+  continent: string;
+  number: number;
 };
 
 export const AssociationRecall: React.FC<InputProps> = ({
   recallInstruction,
   title,
-  data,
+  continent,
+  number,
 }) => {
-  const [numberCorrect, setNumberCorrect] = useState<number>(0);
-  const [questionNumber, setQuestionNumber] = useState<number>(1);
-  const [gameState, setGameState] = useState<PairsRecallGameState>(
-    PairsRecallGameState.Memorize,
+
+  const [ shouldFetch, setShouldFetch ] = useState(true);
+  const [ pairs, setPairs ] = useState<PairQuestion[]>([]);
+
+  const { isPending, error, pairsData } = useFetchCountryCapitalPairs(
+    continent,
+    number,
+    shouldFetch
   );
-  const [pairs, setPairs] = useState<PairQuestion[]>([]);
-  const pair = pairs[questionNumber - 1];
+
+  const { pair, numberCorrect, gameState, questionNumber, handleSubmit, renderTime} = useAssociationRecallState(pairs);
 
   useEffect(() => {
-    if (data) {
-      const randomPairs: PairQuestion[] = randomSelection(data, 10);
-      setPairs(randomPairs);
+    if (shouldFetch && pairsData) {
+      setPairs(pairsData);
+      setShouldFetch(false);
     }
-  }, [data]);
+  }, [pairs]);
 
-  const renderTime = ({ remainingTime }: { remainingTime: number }) => {
-    if (remainingTime === 0) {
-      setGameState(PairsRecallGameState.Play);
-      return 0;
-    }
-    return remainingTime;
-  };
+  if(!pairs) {
+    return <p>No data</p>;
+  }
+
+  if (isPending) {
+    return <p></p>;
+  }
+
+  if (error) {
+    return <p>Error ... {error.message}</p>;
+  }
+
 
   if (gameState == PairsRecallGameState.Finish) {
     return (
@@ -56,43 +68,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
     );
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (gameState == PairsRecallGameState.Play) {
-      checkAnswer(e);
-    } else if (questionNumber == 10) {
-      setGameState(PairsRecallGameState.Finish);
-    } else {
-      setQuestionNumber(questionNumber + 1);
-      setGameState(PairsRecallGameState.Play);
-    }
-  }
-
-  function checkAnswer(e: FormEvent<HTMLFormElement>) {
-    const formData = new FormData(e.currentTarget);
-    const answer = formData.get("text-input")?.toString();
-
-    if (pairs && answer) {
-      if (
-        pair.value
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .replace(/[^\w\s]/g, "") ==
-        answer
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-      ) {
-        setNumberCorrect((prev) => (prev += 1));
-        setGameState(PairsRecallGameState.Correct);
-      } else {
-        setGameState(PairsRecallGameState.Incorrect);
-      }
-    }
-  }
-
-  if (pairs.length > 0) {
+  if (pairs && Array.isArray(pairs) && pairs.length > 0) {
     return (
       <Layout size={Size.medium}>
         <h1 className="text-xl font-bold mb-4">{title}</h1>
@@ -105,15 +81,15 @@ export const AssociationRecall: React.FC<InputProps> = ({
                   <CountdownCircleTimer
                     size={100}
                     isPlaying={gameState == PairsRecallGameState.Memorize}
-                    duration={20}
+                    duration={5}
                     colors={["#F7B801", "#A30000", "#A30000"]}
                     colorsTime={[10, 5, 0]}
                   >
                     {renderTime}
                   </CountdownCircleTimer>
                 </div>
-                {pairs &&
-                  pairs.map((pair) => {
+                {
+                  pairs?.map((pair) => {
                     return (
                       <div key={pair.value} className="flex flex-row flex-wrap">
                         <div className="w-[130px] mt-2">{pair.key}</div>
@@ -131,7 +107,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
                     key={questionNumber}
                     className="flex flex-row flex-wrap gap-2"
                   >
-                    <div className="w-[130px] mt-2">{pair.key}</div>
+                    <div className="w-[130px] mt-2">{pair?.key}</div>
                     {gameState !== PairsRecallGameState.Incorrect && (
                       <TextInput
                         style={{
@@ -156,11 +132,11 @@ export const AssociationRecall: React.FC<InputProps> = ({
                         }}
                         disabled={true}
                         id="text-input"
-                        value={pair.value}
+                        value={pair?.value}
                         autoFocus
                       ></TextInput>
                     )}
-                    {pair.isCorrect && (
+                    {pair?.isCorrect && (
                       <HiCheckCircle
                         color="green"
                         size={30}
