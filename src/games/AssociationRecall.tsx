@@ -86,7 +86,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
                   <CountdownCircleTimer
                     size={100}
                     isPlaying={gameState == PairsRecallGameState.Memorize}
-                    duration={20}
+                    duration={30}
                     colors={["#F7B801", "#A30000", "#A30000"]}
                     colorsTime={[10, 5, 0]}
                   >
