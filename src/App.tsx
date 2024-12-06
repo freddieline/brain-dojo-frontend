@@ -21,12 +21,17 @@ function App() {
               path="/numerical-reasoning"
               element={<StandardQuiz quizName="Numerical reasoning" />}
             />
-            <Route path="/association-recall" element={<AssociationRecall
-             title = "Capital cities"
-              recallInstruction = "Memorise the capital cities"
-              continent="Europe"
-              number={10}
-            />} />
+            <Route
+              path="/association-recall"
+              element={
+                <AssociationRecall
+                  title="Capital cities"
+                  recallInstruction="Memorise the capital cities"
+                  continent="Europe"
+                  number={10}
+                />
+              }
+            />
           </Routes>
         </Router>
       </div>

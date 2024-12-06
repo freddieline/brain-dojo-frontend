@@ -24,17 +24,23 @@ export const AssociationRecall: React.FC<InputProps> = ({
   continent,
   number,
 }) => {
-
-  const [ shouldFetch, setShouldFetch ] = useState(true);
-  const [ pairs, setPairs ] = useState<PairQuestion[]>([]);
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const [pairs, setPairs] = useState<PairQuestion[]>([]);
 
   const { isPending, error, pairsData } = useFetchCountryCapitalPairs(
     continent,
     number,
-    shouldFetch
+    shouldFetch,
   );
 
-  const { pair, numberCorrect, gameState, questionNumber, handleSubmit, renderTime} = useAssociationRecallState(pairs);
+  const {
+    pair,
+    numberCorrect,
+    gameState,
+    questionNumber,
+    handleSubmit,
+    renderTime,
+  } = useAssociationRecallState(pairs);
 
   useEffect(() => {
     if (shouldFetch && pairsData) {
@@ -43,7 +49,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
     }
   }, [pairs]);
 
-  if(!pairs) {
+  if (!pairs) {
     return <p>No data</p>;
   }
 
@@ -54,7 +60,6 @@ export const AssociationRecall: React.FC<InputProps> = ({
   if (error) {
     return <p>Error ... {error.message}</p>;
   }
-
 
   if (gameState == PairsRecallGameState.Finish) {
     return (
@@ -88,15 +93,14 @@ export const AssociationRecall: React.FC<InputProps> = ({
                     {renderTime}
                   </CountdownCircleTimer>
                 </div>
-                {
-                  pairs?.map((pair) => {
-                    return (
-                      <div key={pair.value} className="flex flex-row flex-wrap">
-                        <div className="w-[130px] mt-2">{pair.key}</div>
-                        <div className="w-[130px] mt-2">{pair.value}</div>
-                      </div>
-                    );
-                  })}
+                {pairs?.map((pair) => {
+                  return (
+                    <div key={pair.value} className="flex flex-row flex-wrap">
+                      <div className="w-[130px] mt-2">{pair.key}</div>
+                      <div className="w-[130px] mt-2">{pair.value}</div>
+                    </div>
+                  );
+                })}
               </>
             )}
             {gameState !== PairsRecallGameState.Memorize &&
