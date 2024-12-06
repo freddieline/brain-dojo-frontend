@@ -2,10 +2,10 @@ import "./App.css";
 import "./output.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import MemoriseSequence from "./games-engines/MemoriseSequence";
-import StandardQuiz from "./games-engines/StandardQuiz";
+import MemoriseSequence from "./games/MemoriseSequence";
+import StandardQuiz from "./games/StandardQuiz";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MemoriseCapital } from "./games/MemorizeCapitals";
+import AssociationRecall from "./games/AssociationRecall";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,7 +21,12 @@ function App() {
               path="/numerical-reasoning"
               element={<StandardQuiz quizName="Numerical reasoning" />}
             />
-            <Route path="/association-recall" element={<MemoriseCapital />} />
+            <Route path="/association-recall" element={<AssociationRecall
+             title = "Capital cities"
+              recallInstruction = "Memorise the capital cities"
+              continent="Europe"
+              number={10}
+            />} />
           </Routes>
         </Router>
       </div>

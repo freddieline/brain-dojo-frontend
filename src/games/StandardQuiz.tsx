@@ -5,6 +5,7 @@ import Layout from "../layout/Layout";
 import { useQuery } from "@tanstack/react-query";
 import { Answer } from "../types/types";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import cx from "classnames";
 
 type InputProps = {
   quizName: string;
@@ -35,14 +36,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
         };
         setAnswers(newAnswers);
       }
-      return (
-        <div
-          style={{ borderRadius: "35px" }}
-          className="bg-red-500 font-bold text-white p-3 w-[100px] h-[70px] text-center"
-        >
-          Time's up!
-        </div>
-      );
+      return <div className="font-bold">Time's up!</div>;
     }
     return remainingTime;
   };
@@ -90,59 +84,18 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
       }
     };
 
-    let borderColorClassBtn1 = "border-blue-300 hover:border-blue-500";
-    let borderColorClassBtn2 = "border-blue-300 hover:border-blue-500";
-    let borderColorClassBtn3 = "border-blue-300 hover:border-blue-500";
-    let borderColorClassBtn4 = "border-blue-300 hover:border-blue-500";
+    const correctAnswer = questions[questionNumber - 1].correctAnswer;
     let hasAnswered = false;
+    const answer = answers[questionNumber - 1];
 
     if (answers && !quizFinished) {
       hasAnswered = !!answers[questionNumber - 1];
-      const correctAnswer = questions[questionNumber - 1].correctAnswer;
-      const answer = answers[questionNumber - 1];
-
-      if (hasAnswered) {
-        borderColorClassBtn1 = "border-gray-200 text-gray-300";
-        borderColorClassBtn2 = "border-gray-200 text-gray-300";
-        borderColorClassBtn3 = "border-gray-200 text-gray-300";
-        borderColorClassBtn4 = "border-gray-200 text-gray-300";
-        switch (correctAnswer) {
-          case 1:
-            borderColorClassBtn1 = "border-green-500";
-            break;
-          case 2:
-            borderColorClassBtn2 = "border-green-500";
-            break;
-          case 3:
-            borderColorClassBtn3 = "border-green-500";
-            break;
-          case 4:
-            borderColorClassBtn4 = "border-green-500";
-            break;
-        }
-        if (!answer.isCorrect) {
-          switch (answer.guess) {
-            case 1:
-              borderColorClassBtn1 = "border-red-500";
-              break;
-            case 2:
-              borderColorClassBtn2 = "border-red-500";
-              break;
-            case 3:
-              borderColorClassBtn3 = "border-red-500";
-              break;
-            case 4:
-              borderColorClassBtn4 = "border-red-500";
-              break;
-          }
-        }
-      }
     }
 
     if (!quizFinished) {
       return (
         <Layout>
-          <div className="mt-3 flex flex-row gap-x-2 justify-between">
+          <div className="mt-3 mb-3 flex flex-row gap-x-2 justify-between">
             <div>
               <h1 className="text-2xl bold mb-3">{quizName}</h1>
               <h1 className="text-xl bold mb-3">
@@ -150,7 +103,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
               </h1>
             </div>
             <CountdownCircleTimer
-              size={70}
+              size={85}
               isPlaying={!hasAnswered}
               key={key}
               duration={10}
@@ -169,14 +122,33 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
               </div>
               <div className="mt-3 flex flex-row gap-x-2">
                 <Button
-                  className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 ${borderColorClassBtn1} p-1.5`}
+                  className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 border-blue-300 ${cx(
+                    {
+                      "hover:border-blue-500": !hasAnswered,
+                      "border-green-500 text-black":
+                        hasAnswered && correctAnswer == 1,
+                      "border-red-500":
+                        !answer?.isCorrect && answer?.guess == 1,
+                      "border-gray-200 text-gray-300":
+                        hasAnswered && answer?.guess != 1,
+                    },
+                  )} p-1.5`}
                   onClick={() => handleClickAnswer(1)}
-                  autoFocus
                 >
                   {questions[questionNumber - 1].answer1}
                 </Button>
                 <Button
-                  className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 ${borderColorClassBtn2} p-1.5`}
+                  className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 border-blue-300 ${cx(
+                    {
+                      "hover:border-blue-500": !hasAnswered,
+                      "border-green-500 text-black":
+                        hasAnswered && correctAnswer == 2,
+                      "border-red-500":
+                        !answer?.isCorrect && answer?.guess == 2,
+                      "border-gray-200 text-gray-300":
+                        hasAnswered && answer?.guess != 2,
+                    },
+                  )} p-1.5`}
                   onClick={() => handleClickAnswer(2)}
                 >
                   {questions[questionNumber - 1].answer2}
@@ -185,13 +157,33 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
               {questions[questionNumber - 1].answer3 != "" && (
                 <div className="mt-3 flex flex-row gap-x-2">
                   <Button
-                    className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 ${borderColorClassBtn3} p-1.5`}
+                    className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 border-blue-300 ${cx(
+                      {
+                        "hover:border-blue-500": !hasAnswered,
+                        "border-gray-200 text-gray-300":
+                          hasAnswered && answer?.guess != 3,
+                        "border-green-500 text-black":
+                          hasAnswered && correctAnswer == 3,
+                        "border-red-500":
+                          !answer?.isCorrect && answer?.guess == 3,
+                      },
+                    )} p-1.5`}
                     onClick={() => handleClickAnswer(3)}
                   >
                     {questions[questionNumber - 1].answer3}
                   </Button>
                   <Button
-                    className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 ${borderColorClassBtn4} p-1.5`}
+                    className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 border-blue-300 ${cx(
+                      {
+                        "hover:border-blue-500": !hasAnswered,
+                        "border-green-500 text-black":
+                          hasAnswered && correctAnswer == 4,
+                        "border-red-500":
+                          !answer?.isCorrect && answer?.guess == 4,
+                        "border-gray-200 text-gray-300":
+                          hasAnswered && answer?.guess != 4,
+                      },
+                    )} p-1.5`}
                     onClick={() => handleClickAnswer(4)}
                   >
                     {questions[questionNumber - 1].answer4}

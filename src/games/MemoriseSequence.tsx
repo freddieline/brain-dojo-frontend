@@ -1,11 +1,11 @@
 import Layout from "../layout/Layout";
 import MemoryGameMenu from "../components/MemoryGame/MemoryGameMenu";
-
 import MemoryGameContent from "../components/MemoryGame/MemoryGameContent";
-import { useMemoryGameState } from "../hooks/useMemoryGameState";
+import { useMemorySequenceGameState } from "../hooks/game-state/useMemorySequenceGameState";
 import { Size } from "../types/types";
 
 const MemoriseSequence = () => {
+
   const {
     sequenceItems,
     sequenceLength,
@@ -16,7 +16,7 @@ const MemoriseSequence = () => {
     setupGame,
     start,
     handleSelection,
-  } = useMemoryGameState();
+  } = useMemorySequenceGameState();
 
   return (
     <Layout size={Size.small}>

@@ -12,16 +12,22 @@ const Home = () => {
         <img src="brain.png" alt="Logo" />
       </div>
       <Link className="w-48" to="/sequence-recall">
-        <h3 className="text-xl underline mt-6">Memorise the sequence</h3>
+        <h3 className="text-xl underline mt-6 decoration-1">
+          Memorise the sequence
+        </h3>
       </Link>
       <h3 className="text-md">
         Images <a href="http://www.freepik.com">designed by brgfx / Freepik</a>
       </h3>
       <Link className="w-48" to="/association-recall">
-        <h3 className="text-xl underline mt-6">Memorise the capital cities</h3>
+        <h3 className="text-xl underline mt-6 decoration-1">
+          Memorise the capital cities
+        </h3>
       </Link>
       <Link className="w-48" to="/numerical-reasoning">
-        <h3 className="text-xl underline mt-6">Numerical reasoning</h3>
+        <h3 className="text-xl underline mt-6 decoration-1">
+          Numerical reasoning
+        </h3>
       </Link>
     </Layout>
   );
