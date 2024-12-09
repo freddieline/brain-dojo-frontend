@@ -1,4 +1,5 @@
-import { PairQuestion, PairsRecallGameState, Size } from "../types/types";
+import { PairQuestion } from "../types/types";
+import { PairsRecallGameState, Size } from "../types/constants";
 import { HiCheckCircle } from "react-icons/hi";
 import { Button, TextInput } from "flowbite-react";
 import Results from "../components/Results";
@@ -86,7 +87,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
                   <CountdownCircleTimer
                     size={100}
                     isPlaying={gameState == PairsRecallGameState.Memorize}
-                    duration={30}
+                    duration={20}
                     colors={["#F7B801", "#A30000", "#A30000"]}
                     colorsTime={[10, 5, 0]}
                   >

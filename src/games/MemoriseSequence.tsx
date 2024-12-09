@@ -1,11 +1,10 @@
 import Layout from "../layout/Layout";
 import { useMemorySequenceGameState } from "../hooks/game-state/useMemorySequenceGameState";
-import { Size } from "../types/types";
+import { Size, SequenceRecallGameState } from "../types/constants";
 import { Button } from "flowbite-react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import SequenceTile from "../components/SequenceTile";
 import SelectableTile from "../components/SelectableTile";
-import { SequenceRecallGameState } from "../types/types";
 import { ImCross } from "react-icons/im";
 import { TiTick } from "react-icons/ti";
 import ConfettiExplosion from "react-confetti-explosion";

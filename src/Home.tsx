@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "./layout/Layout";
-import { Size } from "./types/types";
+import { Size } from "./types/constants";
 
 const Home = () => {
   return (

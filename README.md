@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+## Games
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Capital cities
 
-Currently, two official plugins are available:
+Implements the AssociationRecall component.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Method | Endpoint         | Description                   |
+|--------|-------------------|-------------------------------|
+| GET    | `/api/capitals`     | Retrieve a list of capitals. Optional `continent` url param    |
+| POST   | `/api/capitals`     | Create a new capital city            |
+| GET    | `/api/capitals/:id` | Retrieve a capital city by         |
+| PUT    | `/api/capitals/:id` | Update a capital city by ID           |
+| DELETE | `/api/capitals/:id` | Delete a capital city by ID           |
 
-## Expanding the ESLint configuration
+### Numerical reasoning
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Implements the StandardQuiz component.
 
-- Configure the top-level `parserOptions` property like this:
+| Method | Endpoint         | Description                   |
+|--------|-------------------|-------------------------------|
+| GET    | `/api/quiz-questions`     | Retrieve a list of users. Optional `topic` url param  ( = "Numerical reasoning")      |
+| POST   | `/api/quiz-questions`     | Create a new quiz question             |
+| GET    | `/api/quiz-questions/:id` | Retrieve a quiz question by id        |
+| PUT    | `/api/quiz-questions/:id` | Update a quiz question by ID           |
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```

@@ -1,26 +1,7 @@
-export const animals = [
-  "beaver",
-  "cheetah",
-  "cricket",
-  "crocodile",
-  "hen",
-  "kanga",
-  "ladybird",
-  "lion",
-  "parrot",
-  "pelican",
-  "pig",
-  "snail",
-  "rabbit",
-  "tortoise",
-  "wolf",
-];
-
-export type CapitalQuestion = {
+export type Capital = {
+  id: number;
   capital: string;
   country: string;
-  showAnswer?: boolean;
-  isCorrect?: boolean;
 };
 
 export type PairQuestion = {
@@ -41,32 +22,8 @@ export type SelectItem = {
   selected: boolean;
 };
 
-export enum SequenceRecallGameState {
-  PreGame,
-  HowToPlay,
-  Start,
-  Memorize,
-  Play,
-  Won,
-  Lost,
-}
-
-export enum PairsRecallGameState {
-  Memorize,
-  Play,
-  Correct,
-  Incorrect,
-  Finish,
-}
-
 export interface Answer {
   question: number;
   guess?: number;
   isCorrect?: boolean;
-}
-
-export enum Size {
-  small,
-  medium,
-  large,
 }

@@ -1,5 +1,5 @@
 import { randomSelection } from "../../lib/randomSelection";
-import type { CapitalQuestion } from "../../types/types";
+import type { Capital } from "../../types/types";
 import { PairQuestion } from "../../types/types";
 import { useQuery } from "@tanstack/react-query";
 
@@ -14,7 +14,7 @@ export const useFetchCountryCapitalPairs = (
 } => {
   const apiUrl = "/api/capitals?continent=" + continent;
   const url = import.meta.env["VITE_QUIZ_API"] + apiUrl;
-  console.log(shouldFetch);
+
   const { isPending, error, data } = useQuery({
     queryKey: ["data", url],
     queryFn: () => fetch(url).then((res) => res.json()),
@@ -23,7 +23,7 @@ export const useFetchCountryCapitalPairs = (
 
   let pairsData = null;
   if (data && data.data.length > 0) {
-    const jsonData: PairQuestion[] = data.data.map((obj: CapitalQuestion) => ({
+    const jsonData: PairQuestion[] = data.data.map((obj: Capital) => ({
       key: obj.country,
       value: obj.capital,
     }));
