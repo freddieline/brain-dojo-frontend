@@ -210,3 +210,7 @@ a {
   text-underline-offset: 4px;
   text-decoration-thickness: 1px !important;
 }
+
+.focus\:ring-cyan-300:focus {
+  --tw-ring-opacity: 0 !important;
+}
