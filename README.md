@@ -1,8 +1,8 @@
-## Games
+# Games
 
-### Capital cities
+## Capital cities
 
-Implements the AssociationRecall component.
+Implements the `AssociationRecall` component.
 
 | Method | Endpoint         | Description                   |
 |--------|-------------------|-------------------------------|
@@ -12,9 +12,9 @@ Implements the AssociationRecall component.
 | PUT    | `/api/capitals/:id` | Update a capital city by ID           |
 | DELETE | `/api/capitals/:id` | Delete a capital city by ID           |
 
-### Numerical reasoning
+## Numerical reasoning
 
-Implements the StandardQuiz component.
+Implements the `StandardQuiz` component.
 
 | Method | Endpoint         | Description                   |
 |--------|-------------------|-------------------------------|

@@ -1,29 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "flowbite-react";
 import Results from "../components/Results";
 import Layout from "../layout/Layout";
-import { useQuery } from "@tanstack/react-query";
-import { Answer } from "../types/types";
+import { Answer, QuizQuestion } from "../types/types";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import cx from "classnames";
+import { useFetchQuizQuestions } from "../hooks/data-fetch/useFetchQuizQuestions";
 
 type InputProps = {
   quizName: string;
 };
 
 const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
-  const url =
-    import.meta.env["VITE_QUIZ_API"] + "/api/quiz-questions?topic=" + quizName;
-
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [questionNumber, setQuestionNumber] = useState<number>(1);
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [quizFinished, setQuizFinished] = useState<boolean>(false);
   const [key, setKey] = useState(0);
+  const [shouldFetch, setShouldFetch] = useState<boolean>(true);
 
-  const { isPending, error, data } = useQuery({
-    queryKey: ["repoData"],
-    queryFn: () => fetch(url).then((res) => res.json()),
-  });
+  const { quizQuestions, isPending, error } = useFetchQuizQuestions(
+    "Numerical reasoning",
+    10,
+  );
+  useEffect(() => {
+    if (shouldFetch && quizQuestions) {
+      setQuestions(quizQuestions);
+      setShouldFetch(false);
+    }
+  }, [quizQuestions]);
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     if (remainingTime === 0) {
@@ -49,9 +54,7 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
     return <p>Error ... {error.message}</p>;
   }
 
-  if (data) {
-    const questions = data;
-
+  if (questions.length > 0) {
     const handleNextQuestion = () => {
       if (questionNumber < questions.length) {
         setQuestionNumber(questionNumber + 1);
