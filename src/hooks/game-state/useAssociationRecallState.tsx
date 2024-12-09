@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FormEvent } from "react";
-import { PairQuestion, PairsRecallGameState } from "../../types/types";
+import { PairQuestion } from "../../types/types";
+import { PairsRecallGameState } from "../../types/constants";
 
 export const useAssociationRecallState = (pairs: PairQuestion[] | null) => {
   const [numberCorrect, setNumberCorrect] = useState<number>(0);

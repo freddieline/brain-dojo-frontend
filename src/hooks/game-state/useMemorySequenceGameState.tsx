@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  SequenceItem,
-  SelectItem,
-  SequenceRecallGameState,
-} from "../../types/types";
+import { SequenceItem, SelectItem } from "../../types/types";
 import { randomSelection } from "../../lib/randomSelection";
-import { animals } from "../../types/types";
+import { animals, SequenceRecallGameState } from "../../types/constants";
 
 const gameConfig: Record<number, { time: number }> = {
   4: { time: 6 },

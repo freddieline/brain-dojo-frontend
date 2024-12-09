@@ -125,12 +125,12 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
                   className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 border-blue-300 ${cx(
                     {
                       "hover:border-blue-500": !hasAnswered,
-                      "border-green-500 text-black":
-                        hasAnswered && correctAnswer == 1,
                       "border-red-500":
                         !answer?.isCorrect && answer?.guess == 1,
                       "border-gray-200 text-gray-300":
                         hasAnswered && answer?.guess != 1,
+                      "border-green-500 text-black":
+                        hasAnswered && correctAnswer == 1,
                     },
                   )} p-1.5`}
                   onClick={() => handleClickAnswer(1)}
@@ -141,12 +141,12 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
                   className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 border-blue-300 ${cx(
                     {
                       "hover:border-blue-500": !hasAnswered,
-                      "border-green-500 text-black":
-                        hasAnswered && correctAnswer == 2,
                       "border-red-500":
                         !answer?.isCorrect && answer?.guess == 2,
                       "border-gray-200 text-gray-300":
                         hasAnswered && answer?.guess != 2,
+                      "border-green-500 text-black":
+                        hasAnswered && correctAnswer == 2,
                     },
                   )} p-1.5`}
                   onClick={() => handleClickAnswer(2)}
@@ -162,10 +162,10 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
                         "hover:border-blue-500": !hasAnswered,
                         "border-gray-200 text-gray-300":
                           hasAnswered && answer?.guess != 3,
-                        "border-green-500 text-black":
-                          hasAnswered && correctAnswer == 3,
                         "border-red-500":
                           !answer?.isCorrect && answer?.guess == 3,
+                        "border-green-500 text-black":
+                          hasAnswered && correctAnswer == 3,
                       },
                     )} p-1.5`}
                     onClick={() => handleClickAnswer(3)}
@@ -176,12 +176,12 @@ const StandardQuiz: React.FC<InputProps> = ({ quizName }) => {
                     className={`basis-1/2 bg-white text-gray-900 rounded-lg border-4 border-blue-300 ${cx(
                       {
                         "hover:border-blue-500": !hasAnswered,
-                        "border-green-500 text-black":
-                          hasAnswered && correctAnswer == 4,
                         "border-red-500":
                           !answer?.isCorrect && answer?.guess == 4,
                         "border-gray-200 text-gray-300":
                           hasAnswered && answer?.guess != 4,
+                        "border-green-500 text-black":
+                          hasAnswered && correctAnswer == 4,
                       },
                     )} p-1.5`}
                     onClick={() => handleClickAnswer(4)}
