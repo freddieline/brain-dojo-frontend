@@ -29,6 +29,7 @@ export interface Answer {
 }
 
 export type QuizQuestion = {
+  id: number;
   question: string;
   answer: number;
   answer1: string;
@@ -38,3 +39,7 @@ export type QuizQuestion = {
   correctAnswer: number;
   additionalInfo?: string;
 };
+
+const { MODE: ENVIRONMENT } = import.meta.env;
+
+export { ENVIRONMENT };

@@ -1,4 +1,4 @@
-import Layout from "../layout/Layout";
+import Layout from "../components/Layout";
 import { useMemorySequenceGameState } from "../hooks/game-state/useMemorySequenceGameState";
 import { Size, SequenceRecallGameState } from "../types/constants";
 import { Button } from "flowbite-react";
