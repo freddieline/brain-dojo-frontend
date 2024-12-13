@@ -1,7 +1,31 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+  "compilerOptions": {
+    "target": "ESNext",                   // Set the output language level (ES6 in this case)
+    "module": "ESNext",                          // Set the module system to ESNext (for modern JavaScript)
+    "moduleResolution": "node",                  // Use Node.js module resolution strategy
+    "jsx": "react-jsx",      // If using React with JSX, set this to 'react-jsx'
+    "esModuleInterop": true,                     // Enables compatibility with CommonJS modules
+    "skipLibCheck": true,                        // Skip type checking of declaration files for faster build
+    "forceConsistentCasingInFileNames": true,    // Ensure consistent casing for file names
+    "allowSyntheticDefaultImports": true ,
+    "strict": true,                              // Enable all strict type-checking options
+    "noImplicitAny": true,                       // Disallow usage of 'any' type
+    "resolveJsonModule": true,                   // Allow importing .json files
+    "outDir": "./dist",                          // Output directory for compiled files
+    "baseUrl": ".",                              // Base directory for relative module resolution
+    "paths": {
+      "@/*": ["src/*"]                           // Set up path alias for easier imports (optional)
+    },
+    "composite": true,
+    "types": ["node", "vite/client", "@types/jest"],
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  "include": [
+    "src/**/*",
+    "vite.config.ts" ,                   // Include all files inside the 'src' directory
   ],
+  "exclude": [
+    "node_modules",                             // Exclude 'node_modules' directory from compilation
+    "dist"                                      // Exclude 'dist' directory from compilation
+  ]
 }

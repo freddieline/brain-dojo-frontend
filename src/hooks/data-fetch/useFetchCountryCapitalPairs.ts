@@ -13,7 +13,7 @@ export const useFetchCountryCapitalPairs = (
   isPending: boolean;
 } => {
   const apiUrl = "/api/capitals?continent=" + continent;
-  const url = import.meta.env["VITE_QUIZ_API"] + apiUrl;
+  const url = process.env["VITE_QUIZ_API"] + apiUrl;
 
   const { isPending, error, data } = useQuery({
     queryKey: ["data", url],
@@ -22,7 +22,7 @@ export const useFetchCountryCapitalPairs = (
   });
 
   let pairsData = null;
-  if (data && data.data.length > 0) {
+  if (shouldFetch && data && data.data.length > 0) {
     const jsonData: PairQuestion[] = data.data.map((obj: Capital) => ({
       key: obj.country,
       value: obj.capital,

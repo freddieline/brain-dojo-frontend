@@ -6,7 +6,7 @@ import Results from "../components/Results";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import React from "react";
 import cx from "classnames";
-import Layout from "../layout/Layout";
+import Layout from "../components/Layout";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useAssociationRecallState } from "../hooks/game-state/useAssociationRecallState";

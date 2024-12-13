@@ -12,7 +12,8 @@ export const useFetchQuizQuestions = (
   isPending: boolean;
 } => {
   const apiUrl = "/api/quiz-questions?topic=" + topic;
-  const url = import.meta.env["VITE_QUIZ_API"] + apiUrl;
+  const baseUrl = import.meta.env?.VITE_QUIZ_API || "http://localhost:3001";
+  const url = baseUrl + apiUrl;
 
   const { isPending, error, data } = useQuery({
     queryKey: ["data", url],
