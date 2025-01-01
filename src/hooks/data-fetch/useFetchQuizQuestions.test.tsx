@@ -90,7 +90,6 @@ function findQuizQuestion(
 
   return quizQuestionsResponse.find((question) => {
     return Object.keys(searchParams).every((key) => {
- 
       const paramKey = key as keyof QuizQuestion;
       return searchParams[paramKey] === question[paramKey];
     });

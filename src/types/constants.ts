@@ -32,7 +32,7 @@ export enum SequenceRecallGameState {
   Lost,
 }
 
-export enum PairsRecallGameState {
+export enum GeneralGameState {
   Memorize,
   Play,
   Correct,

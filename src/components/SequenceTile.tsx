@@ -24,7 +24,8 @@ const SequenceTile: React.FC<InputProps> = ({
   const darkenedClass = incorrectlyGuessed
     ? "absolute inset-0 bg-black bg-opacity-50 pointer-events-none"
     : "";
-
+  console.log(src);
+  src = "/" + src;
   return (
     <div
       key={id}

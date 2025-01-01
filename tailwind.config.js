@@ -19,6 +19,6 @@ export default {
       },
     },
   },
-  plugins: [flowbitePlugin],
+  // plugins: [flowbitePlugin],
 }
 

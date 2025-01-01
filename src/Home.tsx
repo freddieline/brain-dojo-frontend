@@ -5,29 +5,16 @@ import { Size } from "./types/constants";
 const Home = () => {
   return (
     <Layout size={Size.small}>
-      <h1 className="text-[50px] font-bold mb-6 text-center knewave-regular text-black">
-        Brain Dojo
-      </h1>
       <div className={`w-[100%] overflow-hidden`}>
-        <img src="brain.png" alt="Logo" />
+        <img src="brain-dojo.png" alt="Logo" />
       </div>
-      <Link className="w-48" to="/sequence-recall">
+      <Link className="w-48" to="/memory-games">
         <h3 className="text-xl underline mt-6 decoration-1">
-          Memorise the sequence
+          Memory games
         </h3>
       </Link>
-      <h3 className="text-md">
-        Images <a href="http://www.freepik.com">designed by brgfx / Freepik</a>
-      </h3>
-      <Link className="w-48" to="/association-recall">
-        <h3 className="text-xl underline mt-6 decoration-1">
-          Memorise the capital cities
-        </h3>
-      </Link>
-      <Link className="w-48" to="/numerical-reasoning">
-        <h3 className="text-xl underline mt-6 decoration-1">
-          Numerical reasoning
-        </h3>
+      <Link className="w-48" to="/word-games">
+        <h3 className="text-xl underline mt-6 decoration-1">Word games</h3>
       </Link>
     </Layout>
   );

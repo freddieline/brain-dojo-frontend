@@ -1,13 +1,14 @@
-import Layout from "../components/Layout";
-import { useMemorySequenceGameState } from "../hooks/game-state/useMemorySequenceGameState";
-import { Size, SequenceRecallGameState } from "../types/constants";
+import Layout from "../../components/Layout";
+import { useMemorySequenceGameState } from "../../hooks/game-state/useMemorySequenceGameState";
+import { Size, SequenceRecallGameState } from "../../types/constants";
 import { Button } from "flowbite-react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import SequenceTile from "../components/SequenceTile";
-import SelectableTile from "../components/SelectableTile";
+import SequenceTile from "../../components/SequenceTile";
+import SelectableTile from "../../components/SelectableTile";
 import { ImCross } from "react-icons/im";
 import { TiTick } from "react-icons/ti";
 import ConfettiExplosion from "react-confetti-explosion";
+import { useNavigate } from "react-router-dom";
 
 const MemoriseSequence = () => {
   const {
@@ -21,6 +22,12 @@ const MemoriseSequence = () => {
     start,
     handleSelection,
   } = useMemorySequenceGameState();
+  const navigate = useNavigate();
+  
+  const quit = () => {
+    console.log("quit");
+    navigate("/");
+  }
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     return remainingTime;
@@ -71,6 +78,7 @@ const MemoriseSequence = () => {
                     Select the {sequenceLength} animals that appear in the top
                     grid in the correct order
                   </div>
+                  <div className="flex flex-row">
                   <Button
                     size="lg"
                     className="ml-auto mr-auto mt-6"
@@ -80,6 +88,16 @@ const MemoriseSequence = () => {
                   >
                     Start
                   </Button>
+                  <Button
+                    size="lg"
+                    className="ml-auto mr-auto mt-6"
+                    color="light"
+                    onClick={() => quit()}
+                    pill
+                  >
+                    Quit
+                  </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -91,6 +109,7 @@ const MemoriseSequence = () => {
                 sequenceItems.map((item, index) => {
                   return (
                     <SequenceTile
+                      key={index}
                       id={item.animal}
                       src={`animals/` + item.animal + `.jpeg`}
                       show={sequenceItems[index].show}
@@ -106,9 +125,10 @@ const MemoriseSequence = () => {
             </div>
             <div className="flex flex-row align-center flex-wrap ml-auto mr-auto mt-4">
               {gameState >= SequenceRecallGameState.Start &&
-                selectableItems.map((item) => {
+                selectableItems.map((item, index) => {
                   return (
                     <SelectableTile
+                      key={index}
                       id={item.animal}
                       src={`animals/${item.animal}.jpeg`}
                       onClick={handleSelection}

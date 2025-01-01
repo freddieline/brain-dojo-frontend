@@ -2,18 +2,21 @@ import { randomSelection } from "../../lib/randomSelection";
 import type { Capital } from "../../types/types";
 import { PairQuestion } from "../../types/types";
 import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 
 export const useFetchCountryCapitalPairs = (
   continent: string,
   number: number,
   shouldFetch: boolean,
 ): {
-  pairsData: PairQuestion[] | null;
+  pairs: PairQuestion[];
   error: Error | null;
   isPending: boolean;
 } => {
   const apiUrl = "/api/capitals?continent=" + continent;
   const url = process.env["VITE_QUIZ_API"] + apiUrl;
+
+  const [pairs, setPairs] = useState<PairQuestion[]>([]);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["data", url],
@@ -21,14 +24,15 @@ export const useFetchCountryCapitalPairs = (
     enabled: shouldFetch,
   });
 
-  let pairsData = null;
-  if (shouldFetch && data && data.data.length > 0) {
-    const jsonData: PairQuestion[] = data.data.map((obj: Capital) => ({
-      key: obj.country,
-      value: obj.capital,
-    }));
-    pairsData = randomSelection(jsonData, number);
-  }
+  useEffect(() => {
+    if (data && data.data.length > 0 && shouldFetch) {
+      const jsonData: PairQuestion[] = data.data.map((obj: Capital) => ({
+        key: obj.country,
+        value: obj.capital,
+      }));
+      setPairs(randomSelection(jsonData, number));
+    }
+  }, [data, number, shouldFetch]);
 
-  return { isPending, error, pairsData };
+  return { isPending, error, pairs };
 };
