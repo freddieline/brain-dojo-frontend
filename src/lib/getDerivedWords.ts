@@ -35,19 +35,15 @@ export function findDerivedWords(
   const wordSet = new Set(wordList);
 
   // Step 2: Generate all unique permutations of the input string
-  // Convert the input string into an array of characters and pass to the permute function
   const permutations = permute(inputString.split(""), "", new Set(), 5);
 
   // Step 3: Filter the permutations to find valid words
   const derivedWords = new Set<string>();
   for (const word of permutations) {
-    // Check if the generated word exists in the word list
     if (wordSet.has(word)) {
-      derivedWords.add(word); // Add valid words to the result set
+      derivedWords.add(word);
     }
   }
-  console.log(derivedWords);
 
-  // Return the set of valid derived words
   return derivedWords;
 }
