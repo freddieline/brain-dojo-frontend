@@ -2,7 +2,6 @@ export function findDerivedWords(
   inputString: string,
   wordList: string[],
 ): Set<string> {
-  // Helper function to generate permutations recursively
   function permute(
     chars: string[],
     prefix: string = "",
