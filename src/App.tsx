@@ -27,10 +27,10 @@ function App() {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderWidth: 2,
             },
-            '&.Mui-disabled': {
-              color: '#000', 
-              '-webkit-text-fill-color': '#9e9e9e',
-              borderColor: '#000',
+            "&.Mui-disabled": {
+              color: "#000",
+              "-webkit-text-fill-color": "#9e9e9e",
+              borderColor: "#000",
             },
           },
         },
@@ -49,26 +49,26 @@ function App() {
         },
         styleOverrides: {
           root: {
-            color: '#ffffff', // Custom text color// Custom background color
-            textTransform: 'capitalize', // Disable uppercase text
-            borderRadius: '8px', // Rounded corners
-            fontSize: '16px', // Custom font size
-            padding: '8px 16px', // Custom padding
-            '&:hover': {
-              backgroundColor: '#115293', // Hover background color
+            color: "#ffffff", // Custom text color// Custom background color
+            textTransform: "capitalize", // Disable uppercase text
+            borderRadius: "8px", // Rounded corners
+            fontSize: "16px", // Custom font size
+            padding: "8px 16px", // Custom padding
+            "&:hover": {
+              backgroundColor: "#115293", // Hover background color
             },
           },
           outlined: {
-            border: '2px solid #1976d2', // Custom border for outlined buttons
-            color: '#1976d2',
-            '&:hover': {
-              backgroundColor: 'rgba(25, 118, 210, 0.1)',
+            border: "2px solid #1976d2", // Custom border for outlined buttons
+            color: "#1976d2",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
             },
           },
           text: {
-            color: '#1976d2',
-            '&:hover': {
-              backgroundColor: 'rgba(25, 118, 210, 0.1)', // Light blue hover effect
+            color: "#1976d2",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)", // Light blue hover effect
             },
           },
         },
@@ -84,7 +84,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/memory-games" element={<MemoryGames />} />
-              <Route path="/memory-games/sequence" element={<MemoriseSequence />} />
+              <Route
+                path="/memory-games/sequence"
+                element={<MemoriseSequence />}
+              />
               <Route
                 path="/memory-games/association"
                 element={

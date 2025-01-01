@@ -23,11 +23,11 @@ const MemoriseSequence = () => {
     handleSelection,
   } = useMemorySequenceGameState();
   const navigate = useNavigate();
-  
+
   const quit = () => {
     console.log("quit");
     navigate("/");
-  }
+  };
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     return remainingTime;
@@ -79,24 +79,24 @@ const MemoriseSequence = () => {
                     grid in the correct order
                   </div>
                   <div className="flex flex-row">
-                  <Button
-                    size="lg"
-                    className="ml-auto mr-auto mt-6"
-                    color="purple"
-                    onClick={() => start()}
-                    pill
-                  >
-                    Start
-                  </Button>
-                  <Button
-                    size="lg"
-                    className="ml-auto mr-auto mt-6"
-                    color="light"
-                    onClick={() => quit()}
-                    pill
-                  >
-                    Quit
-                  </Button>
+                    <Button
+                      size="lg"
+                      className="ml-auto mr-auto mt-6"
+                      color="purple"
+                      onClick={() => start()}
+                      pill
+                    >
+                      Start
+                    </Button>
+                    <Button
+                      size="lg"
+                      className="ml-auto mr-auto mt-6"
+                      color="light"
+                      onClick={() => quit()}
+                      pill
+                    >
+                      Quit
+                    </Button>
                   </div>
                 </div>
               </div>

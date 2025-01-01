@@ -7,7 +7,7 @@ type WWLInputProps = {
   mainLetter: SingleLetter;
   handlePress: (l: SingleLetter, i: number) => void;
   pressedLetters: boolean[];
-}
+};
 
 export const WordWheelLetters: React.FC<WWLInputProps> = ({
   letters,

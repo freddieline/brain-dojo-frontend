@@ -15,7 +15,7 @@ export const useFetchWords = (
 } => {
   const apiUrl = "/api/words?word_length=" + wordLength;
   const url = process.env["VITE_QUIZ_API"] + apiUrl;
-  const [ derivedWords, setDerivedWords ] = useState<Set<string> | null>(null);
+  const [derivedWords, setDerivedWords] = useState<Set<string> | null>(null);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["data", url],
@@ -24,11 +24,11 @@ export const useFetchWords = (
   });
 
   useEffect(() => {
-    if(data?.word && shouldFetch){
+    if (data?.word && shouldFetch) {
       setDerivedWords(findDerivedWords(data?.word, EXAMPLE_WORD_LIST));
     }
     console.log(derivedWords);
-  },[data, shouldFetch])
+  }, [data, shouldFetch]);
 
   return { isPending, error, data, derivedWords };
 };
