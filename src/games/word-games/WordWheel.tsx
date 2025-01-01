@@ -21,16 +21,21 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
   );
 
   const [refreshKey, setRefreshKey] = useState<number>(0);
-  const [guess, setGuess ] = useState<string>("");
+  const [guess, setGuess] = useState<string>("");
   const [correctWords, setCorrectWords] = useState<string[]>([]);
   const [shouldFetch, setShouldFetch] = useState<boolean>(true);
-  const { data, derivedWords, error, isPending } = useFetchWords(wordLength, shouldFetch);
+  const { data, derivedWords, error, isPending } = useFetchWords(
+    wordLength,
+    shouldFetch,
+  );
   const [errorText, setErrorText] = useState<string>("");
   const [openResults, setOpenResults] = React.useState(false);
-  const [pressedLetters, setPressedLetters ] = useState<boolean[]>(Array(9).fill(false));
+  const [pressedLetters, setPressedLetters] = useState<boolean[]>(
+    Array(9).fill(false),
+  );
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
-    if (remainingTime === 0) { 
+    if (remainingTime === 0) {
       handleFinish();
       return "00 : 00";
     }
@@ -41,7 +46,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
     return `${pad(minutes)} : ${pad(remainingSeconds)}`;
   };
 
-  function handleFinish(){
+  function handleFinish() {
     setGameState(GeneralGameState.Finish);
     setOpenResults(true);
   }
@@ -62,7 +67,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
 
   function handleClearText() {
     setGuess("");
-    setPressedLetters( Array(9).fill(false));
+    setPressedLetters(Array(9).fill(false));
     setGameState(GeneralGameState.Play);
   }
 
@@ -70,12 +75,12 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
     setGameState(GeneralGameState.Play);
     setGuess(guess + l);
     const newPressedLetters = [...pressedLetters];
-    newPressedLetters[i] = !newPressedLetters[i]; 
+    newPressedLetters[i] = !newPressedLetters[i];
     setPressedLetters(newPressedLetters);
   }
 
   function handleSubmit() {
-    if (data && data.derivedWords.length > 0) {
+    if (data && derivedWords) {
       const correctWord = EXAMPLE_WORD_LIST.find((word) => word === guess);
       if (
         correctWord &&
@@ -103,7 +108,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
       }
     }
     setGuess("");
-    setPressedLetters(Array(9).fill(false)); 
+    setPressedLetters(Array(9).fill(false));
     setRefreshKey(1 + refreshKey);
   }
 
@@ -140,8 +145,12 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
         <div className="mb-2">9 letter word hint: {data.hint}</div>
         <div className="flex flex-row flex-grow gap-2 flex-wrap">
           <div className="w-[35%] h-[65px]">
-            <div className="text-2xl border-2 border-gray-500 rounded p-1">&nbsp;{guess}</div>
-            {GeneralGameState.Incorrect == gameState && <div className="text-red-500 font-bold">{errorText}</div>}
+            <div className="text-2xl border-2 border-gray-500 rounded p-1">
+              &nbsp;{guess}
+            </div>
+            {GeneralGameState.Incorrect == gameState && (
+              <div className="text-red-500 font-bold">{errorText}</div>
+            )}
           </div>
           <div className="flex flex-row flex-grow gap-2">
             <ButtonComponent
@@ -168,12 +177,13 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
           </div>
         </div>
       </form>
-      {derivedWords && <ResultsPopup
-        open={openResults}
-        derivedWords={derivedWords}
-        corretWords={correctWords}
-      ></ResultsPopup>
-      }
+      {derivedWords && (
+        <ResultsPopup
+          open={openResults}
+          derivedWords={derivedWords}
+          corretWords={correctWords}
+        ></ResultsPopup>
+      )}
     </Layout>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 type PrimaryButtonInputProps = {
   text: string;
@@ -17,9 +17,8 @@ export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
   width = 200,
   height = 44,
   onClick,
-  submit = false
+  submit = false,
 }) => {
-
   let className;
   let variant = "outlined";
   if (type === "secondary") {
@@ -36,16 +35,19 @@ export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
       console.warn("No onClick handler defined.");
     }
   };
-    return (
-      <Button 
-        style={{
-          width: `${width}px`,
-          height: `${height}px`,
-        }} 
-        variant={type == "secondary" ? "outlined" : "contained"}
-        type={submit ? "submit" : "button"}
-        className={className} onClick={handleClick} autoFocus={autoFocus}>
-        {text}
-      </Button>
-    );
+  return (
+    <Button
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+      }}
+      variant={type == "secondary" ? "outlined" : "contained"}
+      type={submit ? "submit" : "button"}
+      className={className}
+      onClick={handleClick}
+      autoFocus={autoFocus}
+    >
+      {text}
+    </Button>
+  );
 };

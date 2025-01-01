@@ -26,7 +26,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
   continent,
   number,
 }) => {
-  const [shouldFetch ] = useState<boolean>(true);
+  const [shouldFetch] = useState<boolean>(true);
   const navigate = useNavigate();
   const { isPending, error, pairs } = useFetchCountryCapitalPairs(
     continent,
@@ -36,7 +36,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
 
   const quit = () => {
     navigate("/");
-  }
+  };
 
   const {
     pair,
@@ -168,7 +168,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
                           autoFocus={true}
                         ></ButtonComponent>
                       )}
-                                          {gameState != GeneralGameState.Play &&
+                    {gameState != GeneralGameState.Play &&
                       questionNumber == 10 && (
                         <ButtonComponent
                           text={"Show results"}
@@ -176,12 +176,12 @@ export const AssociationRecall: React.FC<InputProps> = ({
                           autoFocus={true}
                         ></ButtonComponent>
                       )}
-                      <ButtonComponent
-                        text={"Quit"}
-                        autoFocus={true}
-                        onClick={quit}
-                        type="secondary"
-                      ></ButtonComponent>
+                    <ButtonComponent
+                      text={"Quit"}
+                      autoFocus={true}
+                      onClick={quit}
+                      type="secondary"
+                    ></ButtonComponent>
                   </div>
                 </>
               )}

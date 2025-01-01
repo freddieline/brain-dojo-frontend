@@ -18,22 +18,17 @@ export const ResultsPopup: React.FC<InputProps> = ({
   let wordArray = Array.from(derivedWords);
   const missedWords = wordArray.filter((word) => !corretWords.includes(word));
 
-  let oddIndexItems= [];
+  let oddIndexItems = [];
   let evenIndexItems = [];
-  for (var x = 0;  x < missedWords.length; x++){
-    if(x % 2 != 0){
+  for (var x = 0; x < missedWords.length; x++) {
+    if (x % 2 != 0) {
       oddIndexItems.push(missedWords[x]);
-    }
-    else {
+    } else {
       evenIndexItems.push(missedWords[x]);
     }
   }
-  
-  function handleTextChange(s: string) {
-    console.log(s);
-  }
 
-  function handleClick(){
+  function handleClick() {
     navigate("/");
   }
 
@@ -48,7 +43,16 @@ export const ResultsPopup: React.FC<InputProps> = ({
           Well done! Your score is{" "}
           <span className="font-bold">{corretWords.length}</span>
         </div>
-        <div className="mt-2">You missed these words which can be found in the <a className="text-blue-600 underline" href="https://www.collinsdictionary.com/dictionary/english">Collins English Dictionary</a></div>
+        <div className="mt-2">
+          You missed these words which can be found in the{" "}
+          <a
+            className="text-blue-600 underline"
+            href="https://www.collinsdictionary.com/dictionary/english"
+            target="_blank"
+          >
+            Collins English Dictionary
+          </a>
+        </div>
         <div className="flex flex-row mt-4 h-[200px] overflow-scroll border-[2px] p-2">
           <ul className="w-[50%]">
             {evenIndexItems.length > 0 &&
