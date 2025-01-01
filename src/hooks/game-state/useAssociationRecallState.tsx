@@ -1,18 +1,17 @@
-import { useState } from "react";
-import { FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { PairQuestion } from "../../types/types";
-import { PairsRecallGameState } from "../../types/constants";
+import { GeneralGameState } from "../../types/constants";
 
 export const useAssociationRecallState = (pairs: PairQuestion[] | null) => {
   const [numberCorrect, setNumberCorrect] = useState<number>(0);
   const [questionNumber, setQuestionNumber] = useState<number>(1);
-  const [gameState, setGameState] = useState<PairsRecallGameState>(
-    PairsRecallGameState.Memorize,
+  const [gameState, setGameState] = useState<GeneralGameState>(
+    GeneralGameState.Memorize,
   );
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     if (remainingTime === 0) {
-      setGameState(PairsRecallGameState.Play);
+      setGameState(GeneralGameState.Play);
       return 0;
     }
     return remainingTime;
@@ -22,13 +21,13 @@ export const useAssociationRecallState = (pairs: PairQuestion[] | null) => {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (gameState == PairsRecallGameState.Play) {
+    if (gameState == GeneralGameState.Play) {
       checkAnswer(e);
     } else if (questionNumber == 10) {
-      setGameState(PairsRecallGameState.Finish);
+      setGameState(GeneralGameState.Finish);
     } else {
       setQuestionNumber(questionNumber + 1);
-      setGameState(PairsRecallGameState.Play);
+      setGameState(GeneralGameState.Play);
     }
   }
 
@@ -49,9 +48,9 @@ export const useAssociationRecallState = (pairs: PairQuestion[] | null) => {
           .replace(/[\u0300-\u036f]/g, "")
       ) {
         setNumberCorrect((prev) => (prev += 1));
-        setGameState(PairsRecallGameState.Correct);
+        setGameState(GeneralGameState.Correct);
       } else {
-        setGameState(PairsRecallGameState.Incorrect);
+        setGameState(GeneralGameState.Incorrect);
       }
     }
   }

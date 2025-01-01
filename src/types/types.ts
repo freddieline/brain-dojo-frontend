@@ -28,6 +28,15 @@ export interface Answer {
   isCorrect?: boolean;
 }
 
+export interface WordWheel {
+  id: number;
+  word: string;
+  letters: SingleLetter[];
+  mainLetter: SingleLetter;
+  derivedWords: string[];
+  hint?: string;
+}
+
 export type QuizQuestion = {
   id: number;
   question: string;
@@ -40,6 +49,30 @@ export type QuizQuestion = {
   additionalInfo?: string;
 };
 
-const { MODE: ENVIRONMENT } = import.meta.env;
-
-export { ENVIRONMENT };
+export type SingleLetter =
+  | "a"
+  | "b"
+  | "c"
+  | "d"
+  | "e"
+  | "f"
+  | "g"
+  | "h"
+  | "i"
+  | "j"
+  | "k"
+  | "l"
+  | "m"
+  | "n"
+  | "o"
+  | "p"
+  | "q"
+  | "r"
+  | "s"
+  | "t"
+  | "u"
+  | "v"
+  | "w"
+  | "x"
+  | "y"
+  | "z";
