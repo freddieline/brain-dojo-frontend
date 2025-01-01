@@ -27,7 +27,6 @@ export const useFetchWords = (
     if (data?.word && shouldFetch) {
       setDerivedWords(findDerivedWords(data?.word, EXAMPLE_WORD_LIST));
     }
-    console.log(derivedWords);
   }, [data, shouldFetch]);
 
   return { isPending, error, data, derivedWords };

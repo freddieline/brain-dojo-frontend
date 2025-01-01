@@ -80,7 +80,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
   }
 
   function handleSubmit() {
-    if (data && data.derivedWords.length > 0) {
+    if (data && derivedWords) {
       const correctWord = EXAMPLE_WORD_LIST.find((word) => word === guess);
       if (
         correctWord &&

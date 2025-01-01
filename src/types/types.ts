@@ -33,7 +33,6 @@ export interface WordWheel {
   word: string;
   letters: SingleLetter[];
   mainLetter: SingleLetter;
-  derivedWords: string[];
   hint?: string;
 }
 
