@@ -26,6 +26,7 @@ export const WordWheelLetters: React.FC<WWLInputProps> = ({
           })}
           onClick={() => handlePress(letter, index)}
           type="button"
+          disabled={pressedLetters[index]}
         >
           <div key={"item-text-" + index} className="circle-item-text">
             {letter}
