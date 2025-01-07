@@ -14,6 +14,7 @@ const SelectableTile: React.FC<InputProps> = ({
   show,
   selected,
 }) => {
+  
   function handleOnClick() {
     onClick(id);
   }
@@ -21,6 +22,7 @@ const SelectableTile: React.FC<InputProps> = ({
   const hiddenClass = show ? "" : " invisible";
   const selectedClass = selected ? " select" : "";
   src = "/" + src;
+
   return (
     <button
       key={id}

@@ -1,4 +1,3 @@
-import { PairQuestion } from "../../types/types";
 import { GeneralGameState, Size } from "../../types/constants";
 import { HiCheckCircle } from "react-icons/hi";
 import { TextInput } from "flowbite-react";
@@ -8,7 +7,7 @@ import React from "react";
 import cx from "classnames";
 import Layout from "../../components/Layout";
 import { useState } from "react";
-import { useAssociationRecallState } from "../../hooks/game-state/useAssociationRecallState";
+import { useMemoryPairGameState } from "../../hooks/game-state/useMemoryPairGameState";
 import { useFetchCountryCapitalPairs } from "../../hooks/data-fetch/useFetchCountryCapitalPairs";
 import { ButtonComponent } from "../../components/ButtonComponent";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +44,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
     questionNumber,
     handleSubmit,
     renderTime,
-  } = useAssociationRecallState(pairs);
+  } = useMemoryPairGameState(pairs);
 
   if (!pairs) {
     return <p>No data</p>;
