@@ -106,7 +106,6 @@ function App() {
                   <WordWheel wordLength={7} numberOfQuestions={10}></WordWheel>
                 }
               ></Route>
-              created by Freddie Line
             </Routes>
           </Router>
         </div>
