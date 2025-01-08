@@ -25,9 +25,9 @@ export const useFetchWords = (
 
   useEffect(() => {
     if (data?.word && shouldFetch) {
-      setDerivedWords(findDerivedWords(data?.word, EXAMPLE_WORD_LIST));
+      setDerivedWords(findDerivedWords(data?.word, data.mainLetter, EXAMPLE_WORD_LIST));
     }
   }, [data, shouldFetch]);
-
+  
   return { isPending, error, data, derivedWords };
 };

@@ -1,5 +1,8 @@
+import { SingleLetter } from "../types/types";
+
 export function findDerivedWords(
   inputString: string,
+  mainLetter: SingleLetter,
   wordList: string[],
 ): Set<string> {
   function permute(
@@ -9,8 +12,7 @@ export function findDerivedWords(
     minLength: number = 4,
   ): Set<string> {
     // Base case: If there are no more characters to permute, add the prefix to results
-
-    if (prefix.length >= minLength) {
+    if (prefix.length >= minLength && prefix.includes(mainLetter)) {
       results.add(prefix);
     }
 
