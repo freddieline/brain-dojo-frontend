@@ -122,6 +122,7 @@ export const AssociationRecall: React.FC<InputProps> = ({
                         id="text-input"
                         name="text-input"
                         autoFocus={true}
+                        autoComplete="off"
                       ></TextInput>
                     )}
                     {gameState == GeneralGameState.Incorrect && (
