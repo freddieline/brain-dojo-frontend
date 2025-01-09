@@ -2,7 +2,7 @@ import { useFetchQuizQuestions } from "./useFetchQuizQuestions";
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { mockQuizQuestions, server } from "../../test/mocks/server";
-import { QuizQuestion } from "@/types/types";
+import { QuizQuestion } from "../../types/types";
 
 let testQueryClient: QueryClient = new QueryClient({
   defaultOptions: {

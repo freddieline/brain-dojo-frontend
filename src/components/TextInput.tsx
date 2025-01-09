@@ -5,7 +5,7 @@ type InputProps = {
   label?: string; // Optional label for the TextField
   value?: string; // Current value of the TextField
   error?: boolean;
-  onChange: (value: string) => void; // Callback to update the value
+  onChange?: (value: string) => void; // Callback to update the value
   validation?: (value: string) => boolean; // Validation function, returns true if valid
   helperTextOnError?: string; // Error message to display when validation fails
   [key: string]: any;
@@ -20,7 +20,6 @@ export const TextInput: React.FC<InputProps> = ({
   ...props
 }) => {
   const [helperText, setHelperText] = useState("");
-  console.log(value);
 
   useEffect(() => {
     if (error) {
@@ -32,7 +31,9 @@ export const TextInput: React.FC<InputProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    onChange(newValue);
+    if(onChange){
+      onChange(newValue);
+    }
   };
 
   return (

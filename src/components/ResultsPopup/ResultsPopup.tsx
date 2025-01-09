@@ -2,6 +2,8 @@ import Modal from "@mui/material/Modal";
 import "./ResultsPopup.css";
 import { ButtonComponent } from "../ButtonComponent";
 import { useNavigate } from "react-router-dom";
+import { TextInput } from "../TextInput";
+import { usePostHighscore } from "../../hooks/data-post/usePostHighscore";
 
 type InputProps = {
   open: boolean;
@@ -28,7 +30,27 @@ export const ResultsPopup: React.FC<InputProps> = ({
     }
   }
 
-  function handleClick() {
+  const { mutate, isPending, isError, error, isSuccess, data } = usePostHighscore();
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    if(data.name){
+      const body = {
+        name: data.name as string,
+        game: 'word wheel',
+        score: corretWords.length == 0 ? 1 : corretWords.length
+      };
+      mutate(body);
+    } else {
+      console.log('no name');
+    }
+    
+  }
+
+  function handleCancel() {
     navigate("/");
   }
 
@@ -39,6 +61,8 @@ export const ResultsPopup: React.FC<InputProps> = ({
       aria-describedby="modal-modal-description"
     >
       <div className="popup">
+        { !isSuccess &&
+        <div>
         <div>
           Well done! Your score is{" "}
           <span className="font-bold">{corretWords.length}</span>
@@ -63,23 +87,51 @@ export const ResultsPopup: React.FC<InputProps> = ({
               oddIndexItems.map((word: string) => <li key={word}>{word}</li>)}
           </ul>
         </div>
-        {/* <TextInput
-          type="text"
-          label="Name"
-          id="text-input"
-          name="text-input"
-          className="grow mt-2"
-          autoFocus={true}
-          onChange={handleTextChange}
-          autoComplete="off"
-        ></TextInput> */}
-        <div className="mt-4  flex flex-row justify-between gap-2">
+        <form onSubmit={handleSubmit}>
+          <div className="grow mt-4">       
+            <div className="mb-4">Submit high score</div>
+            <TextInput
+              type="text"
+              label="Name"
+              id="text-input"
+              name="name"
+              autoFocus={true}
+              autoComplete="off"
+            ></TextInput>
+          </div>
+          <div className="mt-4  flex flex-row justify-between gap-2">
+            <ButtonComponent
+                text={"Submit"}
+                width={250}
+                submit={true}>
+            </ButtonComponent>
+            <ButtonComponent
+                onClick={handleCancel}
+                type='secondary'
+                text={"Cancel"}
+                width={250}
+            ></ButtonComponent>
+          </div>
+        </form>
+        </div> 
+        }
+        { isSuccess && 
+        <div>
+          Word wheel high scores:
+          <table className="mt-4 mb-4 w-[330px]">
+            <tr ><th className="text-left">Name</th><th className="text-left">Score</th></tr>
+            { data.slice(0,15).map((item:any) => {
+              return <tr><td>{item.name}</td><td>{item.score}</td></tr>
+            })}
+          </table>
           <ButtonComponent
-            onClick={handleClick}
+            onClick={handleCancel}
+            type='secondary'
             text={"Main menu"}
-            width={250}
+            width={200}
           ></ButtonComponent>
         </div>
+        }
       </div>
     </Modal>
   );

@@ -35,6 +35,7 @@ export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
       console.warn("No onClick handler defined.");
     }
   };
+
   return (
     <Button
       style={{
@@ -44,7 +45,7 @@ export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
       variant={type == "secondary" ? "outlined" : "contained"}
       type={submit ? "submit" : "button"}
       className={className}
-      onClick={handleClick}
+      {...(onClick ? { onClick: handleClick } : {})} 
       autoFocus={autoFocus}
     >
       {text}

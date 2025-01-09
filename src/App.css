@@ -211,6 +211,8 @@ a {
   text-decoration-thickness: 1px !important;
 }
 
-.focus\:ring-cyan-300:focus {
+[type=text]:focus {
   --tw-ring-opacity: 0 !important;
+  outline: none;
+  box-shadow: none;
 }
