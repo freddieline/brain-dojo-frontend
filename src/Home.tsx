@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from '@mui/material/Link';
 import Layout from "./components/Layout";
 import { Size } from "./types/constants";
 
@@ -10,13 +10,13 @@ const Home = () => {
           <div className={`w-[100%] overflow-hidden`}>
             <img src="brain-dojo.png" alt="Logo" />
           </div>
-          <Link className="w-48" to="/memory-games">
-            <h3 className="text-xl underline mt-6 decoration-1">
+          <Link className="w-48" href="/memory-games" color="inherit" underline="hover">
+            <h3 className="text-xl mt-6 decoration-1">
               Memory games
             </h3>
           </Link>
-          <Link className="w-48" to="/word-games">
-            <h3 className="text-xl underline mt-6 decoration-1">Word games</h3>
+          <Link className="w-48" href="/word-games" color="inherit" underline="hover">
+            <h3 className="text-xl mt-6 decoration-1">Word games</h3>
           </Link>
         </div>
         <div className="fixed bottom-0 left-0 p-3">created by Freddie Line</div>
