@@ -11,8 +11,8 @@ const WordGames = () => {
       <div className="mt-6 font-bold">
         <a href="/">Home</a> {">"} Word Games
       </div>
-      <Link className="w-48" to="/word-games/word-wheel">
-        <h3 className="text-xl underline mt-3 decoration-1">Word Wheel</h3>
+      <Link to="/word-games/word-wheel" className="no-underline text-black hover:underline">
+        <h3 className="text-xl mt-3">Word Wheel</h3>
       </Link>
     </Layout>
   );

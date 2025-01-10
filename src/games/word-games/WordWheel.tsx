@@ -89,7 +89,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
         guess.length > 3
       ) {
         setGameState(GeneralGameState.Correct);
-        setCorrectWords((prevWords) => [...prevWords, guess]);
+        setCorrectWords((prevWords) => [guess, ...prevWords]);
       } else if (
         correctWord &&
         correctWords.find((word) => word === correctWord)
@@ -124,7 +124,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
         <CountdownCircleTimer
           size={85}
           duration={600}
-          isPlaying={true}
+          isPlaying={gameState != GeneralGameState.Finish}
           colors={["#F7B801", "#A30000", "#A30000"]}
           colorsTime={[10, 5, 0]}
         >
@@ -144,7 +144,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
         </div>
         <div className="mb-2">9 letter word hint: {data.hint}</div>
         <div className="flex flex-row flex-grow gap-2 flex-wrap">
-          <div className="w-[35%] h-[65px]">
+          <div className="w-[47%] h-[65px]">
             <div className="text-2xl border-2 border-gray-500 rounded p-1">
               &nbsp;{guess}
             </div>
@@ -156,8 +156,8 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
             <ButtonComponent
               type="primary"
               height={44}
-              text={"Add word"}
-              width={130}
+              text={"Add"}
+              width={80}
               onClick={handleSubmit}
             ></ButtonComponent>
             <ButtonComponent
@@ -165,7 +165,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
               height={44}
               text={"Clear"}
               onClick={handleClearText}
-              width={100}
+              width={80}
             ></ButtonComponent>
             <ButtonComponent
               type="secondary"

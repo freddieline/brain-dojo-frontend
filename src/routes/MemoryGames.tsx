@@ -11,19 +11,19 @@ const MemoryGames = () => {
       <div className="mt-6 font-bold">
         <a href="/">Home</a> {">"} Memory Games
       </div>
-      <Link className="w-48" to="/memory-games/sequence">
-        <h3 className="text-xl underline mt-3 decoration-1">
+      <Link to="/memory-games/sequence" className="no-underline text-black hover:underline decoration-2">
+        <h3 className="text-xl mt-3">
           Memorise the sequence
         </h3>
       </Link>
-      <h3 className="text-md">
+      <h3 className="text-sm">
         Images{" "}
         <a href="http://www.freepik.com" style={{ textDecoration: "none" }}>
           designed by brgfx / Freepik
         </a>
       </h3>
-      <Link className="w-48" to="/memory-games/association">
-        <h3 className="text-xl underline mt-3 decoration-1">
+      <Link to="/memory-games/association" className="no-underline text-black hover:underline">
+        <h3 className="text-xl mt-4">
           Memorise the capital cities
         </h3>
       </Link>
