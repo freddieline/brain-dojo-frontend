@@ -4,7 +4,9 @@
 
 <b>Description:</b> A game where the user has to create words using the letters displayed and must include the central letter. The word must be 4 or more letters. The total score is the number of words found. 
 
-<b>Technical implementation: </b> The API call fetches a random word. The frontend randomises the letters in the word for display and then runs permutations of 4 or more of the letters and checks for matches in a word list (`/lib/exampleWordList.ts`) to get a list of derived words. The derived words are added to the word class and displayed when the user has finished making his own suggestions.
+<b>Technical implementation: </b> The API call fetches a random word. The frontend randomises the letters in the word for display and then runs a `findDerivedWords` function which finds permutations of 4 or more of the letters and checks for matches in a word list (`/lib/exampleWordList.ts`).to get a list of derived words. The derived words are added to the word class and displayed when the user has finished making his own suggestions.
+
+This solution means a lot of processing can be handled by the front-end saving on costs.
 
 <b>API calls:</b>
 
