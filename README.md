@@ -2,7 +2,9 @@
 
 ### Word Wheel
 
-A game where the user has to create words using at most one of each of the letters displayed and must include the central letter. The word must be 4 or more letters. The total score is the number of words found. 
+<b>Description:</b> A game where the user has to create words using the letters displayed and must include the central letter. The word must be 4 or more letters. The total score is the number of words found. 
+
+<b>Technical implementation: </b> The API call fetches a random word. The frontend randomises the letters in the word for display and then runs permutations of 4 or more of the letters and checks for matches in a word list (`/lib/exampleWordList.ts`) to get a list of derived words. The derived words are added to the word class and displayed when the user has finished making his own suggestions.
 
 <b>API calls:</b>
 
@@ -18,10 +20,9 @@ A game where the user has to create words using at most one of each of the lette
 
 ### Memorise the sequence
 
-A game where a number of images (of animals) on cards are show to the user for a few seconds. Afterwards the cards are flipped around hiding the image and the user has to select the correct image in the correct order from a selection of four images. The user wins if he selects all the correct animals in the correct order (no time limit).
+Description:</b> A game where a number of images (of animals) on cards are show to the user for a few seconds. Afterwards the cards are flipped around hiding the image and the user has to select the correct image in the correct order from a selection of four images. The user wins if he selects all the correct animals in the correct order (no time limit).
 
-<b>API calls - </b>
-No API calls or backend database as the data is not likely to change or it will change very infrequently.
+<b>API calls: </b>No API calls or backend database as the data is not likely to change or it will change very infrequently.
 
 The list of animals is stored as an array of string:
 
