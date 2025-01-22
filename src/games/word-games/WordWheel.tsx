@@ -121,9 +121,9 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
     <Layout size={Size.large}>
       <div className="flex flex-row justify-between">
         <div className="">
-          <div className="text-3xl mb-4">Word wheel</div>
+          <div className="text-2xl mb-4">Word wheel</div>
           <div className="text-lg mb-2 max-w-[290px]">
-            Find as many words with more than 3 letters using the central letter
+            Find words with more than 3 letters using the central letter.
           </div>
         </div>
         <CountdownCircleTimer
