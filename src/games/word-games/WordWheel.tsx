@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useFetchWords } from "../../hooks/data-fetch/useFetchWords";
 import Layout from "../../components/Layout";
 import { Size, GeneralGameState } from "../../types/constants";
 import { ButtonComponent } from "../../components/ButtonComponent";
-import { WordWheelLetters } from "../../components/WordWheel/WordWheelLetters";
+import { WordWheelLetters } from "../../components/word-wheel-letters/WordWheelLetters";
 import { CorrectWords } from "../../components/CorrectWords";
 import { EXAMPLE_WORD_LIST } from "../../lib/exampleWordList";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { ResultsPopup } from "../../components/ResultsPopup/ResultsPopup";
+import { ResultsPopup } from "../../components/modals/results-modal/ResultsPopup";
 import { SingleLetter } from "../../types/types";
+import { useMediaQuery } from "@mui/material";
+import { CorrectWordsModal } from "../../components/modals/correct-words-modal/CorrectWordsModal";
 
 type WordWheelProps = {
   wordLength: number;
@@ -33,6 +35,9 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
   const [pressedLetters, setPressedLetters] = useState<boolean[]>(
     Array(9).fill(false),
   );
+  const [openCorrectWordsModal, setOpenCorrectWordsModal ] = useState<boolean>(false);
+
+  const isMobile = useMediaQuery("(max-width:567px)");
 
   const renderTime = ({ remainingTime }: { remainingTime: number }) => {
     if (remainingTime === 0) {
@@ -140,11 +145,11 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
             handlePress={handlePress}
             pressedLetters={pressedLetters}
           ></WordWheelLetters>
-          <CorrectWords words={correctWords}></CorrectWords>
+          { isMobile ? <div><ButtonComponent text="Show correct words" type="secondary" className="mb-5" onClick={() => setOpenCorrectWordsModal(true)}></ButtonComponent><CorrectWordsModal correctWords={correctWords} open={openCorrectWordsModal} setOpen={setOpenCorrectWordsModal}></CorrectWordsModal></div> : <CorrectWords words={correctWords}></CorrectWords>}
         </div>
-        <div className="mb-2">9 letter word hint: {data.hint}</div>
+        <div className="mb-2 mt-2">9 letter word hint: {data.hint}</div>
         <div className="flex flex-row flex-grow gap-2 flex-wrap">
-          <div className="w-[47%] h-[65px]">
+          <div className="w-[47%]">
             <div className="text-2xl border-2 border-gray-500 rounded p-1">
               &nbsp;{guess}
             </div>

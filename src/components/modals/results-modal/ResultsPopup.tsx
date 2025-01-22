@@ -1,9 +1,9 @@
 import Modal from "@mui/material/Modal";
 import "./ResultsPopup.css";
-import { ButtonComponent } from "../ButtonComponent";
+import { ButtonComponent } from "../../ButtonComponent";
 import { useNavigate } from "react-router-dom";
-import { TextInput } from "../TextInput";
-import { usePostHighscore } from "../../hooks/data-post/usePostHighscore";
+import { TextInput } from "../../TextInput";
+import { usePostHighscore } from "../../../hooks/data-post/usePostHighscore";
 
 type InputProps = {
   open: boolean;

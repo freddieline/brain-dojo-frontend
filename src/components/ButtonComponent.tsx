@@ -9,7 +9,9 @@ type PrimaryButtonInputProps = {
   type?: "primary" | "secondary";
   onClick?: () => void;
   submit?: boolean;
+  [key: string]: any;
 };
+
 export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
   type = "primary",
   text,
@@ -18,6 +20,7 @@ export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
   height = 44,
   onClick,
   submit = false,
+  ...props
 }) => {
   let className;
   let variant = "outlined";
@@ -47,6 +50,7 @@ export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
       className={className}
       {...(onClick ? { onClick: handleClick } : {})} 
       autoFocus={autoFocus}
+      {...props}
     >
       {text}
     </Button>
