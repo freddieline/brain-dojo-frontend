@@ -5,7 +5,7 @@
 ![word-wheel](https://github.com/user-attachments/assets/b10aa767-d2db-48c0-99c0-845f0f2046e2)
 
 
-<b>Description:</b> A game where a user has 10 minutes to create words using the letters displayed and must include the central letter. The word must be 4 or more letters. The total score is the number of words found. 
+<b>Description:</b> A game where a user has 10 minutes to create words using the letters displayed and must include the central letter. The word must be 4 or more letters and the total score is the number of words found. A the end the user will be shown the words they missed and a chance to add their name to the leaderboard.
 
 <b>Technical implementation: </b> The API call fetches a random word. The frontend randomises the letters in the word for display and then runs a `findDerivedWords` function which finds permutations of 4 or more of the letters and checks for matches in a word list (`/lib/exampleWordList.ts`). The derived words are added to the word class and displayed when the user has finished making his own suggestions.
 
@@ -24,6 +24,7 @@ This solution means a lot of processing can be handled by the front-end saving o
 ## Memory games
 
 ### Memorise the sequence
+![sequence](https://github.com/user-attachments/assets/8b9eae3d-c636-4abf-ab04-7b9ed9134e62)
 
 Description:</b> A game where a number of images (of animals) on cards are show to the user for a few seconds. Afterwards the cards are flipped around hiding the image and the user has to select the correct image in the correct order from a selection of four images. The user wins if he selects all the correct animals in the correct order (no time limit).
 
@@ -35,6 +36,7 @@ The list of animals is stored as an array of string:
 
 
 ### Memorise the capitals cities
+
 
 A game where a list of countries and the associated capital cities is shown for 20 seconds and then removed. The user then has to type in the correct capital city with the correct spelling for a correct answer.
 
