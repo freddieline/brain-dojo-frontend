@@ -2,7 +2,10 @@
 
 ### Word Wheel
 
-<b>Description:</b> A game where the user has to create words using the letters displayed and must include the central letter. The word must be 4 or more letters. The total score is the number of words found. 
+![word-wheel](https://github.com/user-attachments/assets/b10aa767-d2db-48c0-99c0-845f0f2046e2)
+
+
+<b>Description:</b> A game where a user has 10 minutes to create words using the letters displayed and must include the central letter. The word must be 4 or more letters. The total score is the number of words found. 
 
 <b>Technical implementation: </b> The API call fetches a random word. The frontend randomises the letters in the word for display and then runs a `findDerivedWords` function which finds permutations of 4 or more of the letters and checks for matches in a word list (`/lib/exampleWordList.ts`). The derived words are added to the word class and displayed when the user has finished making his own suggestions.
 
