@@ -6,7 +6,6 @@ const MemoryGames = () => {
   return (
     <Layout size={Size.small}>
       <div className="flex flex-col">
-      <div className="h-[82vh]">
         <div className={`w-[100%] overflow-hidden`}>
           <img src="brain-dojo.png" alt="Logo" />
         </div>
@@ -29,11 +28,12 @@ const MemoryGames = () => {
             Memorise the capital cities
           </h3>
         </Link>
-      </div>
-      <a href="https://buymeacoffee.com/freddieline">
-        <img src="bmc-full-logo.png" width={200} className="mb-2 hover:pointer" />
-        </a>
-        created by Freddie Line
+        <div className="absolute bottom-5">
+          <a href="https://buymeacoffee.com/freddieline">
+            <img src="bmc-full-logo.png" width={200} className="mb-2 hover:pointer" />
+          </a>
+          created by Freddie Line
+        </div>
       </div>
     </Layout>
   );
