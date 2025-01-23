@@ -13,13 +13,20 @@ const WordGames = () => {
           <div className="mt-6 font-bold">
             <a href="/">Home</a> {">"} Word Games
           </div>
-          <Link to="/word-games/word-wheel" className="no-underline text-black hover:underline">
+          <Link
+            to="/word-games/word-wheel"
+            className="no-underline text-black hover:underline"
+          >
             <h3 className="text-xl mt-3">Word Wheel</h3>
           </Link>
         </div>
         <div className="absolute bottom-5">
           <a href="https://buymeacoffee.com/freddieline">
-            <img src="bmc-full-logo.png" width={200} className="mb-2 hover:pointer" />
+            <img
+              src="bmc-full-logo.png"
+              width={200}
+              className="mb-2 hover:pointer"
+            />
           </a>
           created by Freddie Line
         </div>

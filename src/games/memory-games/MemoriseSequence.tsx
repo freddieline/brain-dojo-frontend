@@ -3,8 +3,8 @@ import { useMemorySequenceGameState } from "../../hooks/game-state/useMemorySequ
 import { Size, SequenceRecallGameState } from "../../types/constants";
 import { Button } from "flowbite-react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import SequenceTile from "../../components/SequenceTile";
-import SelectableTile from "../../components/SelectableTile";
+import SequenceTile from "../../components/memorise-the-sequence/SequenceTile";
+import SelectableTile from "../../components/memorise-the-sequence/SelectableTile";
 import { ImCross } from "react-icons/im";
 import { TiTick } from "react-icons/ti";
 import ConfettiExplosion from "react-confetti-explosion";

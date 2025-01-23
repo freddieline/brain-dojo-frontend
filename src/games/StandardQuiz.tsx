@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "flowbite-react";
-import Results from "../components/Results";
+import Results from "../components/multiple-choice-quiz/QuizResults";
 import Layout from "../components/Layout";
 import { Answer, QuizQuestion } from "../types/types";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";

@@ -31,7 +31,7 @@ export const TextInput: React.FC<InputProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    if(onChange){
+    if (onChange) {
       onChange(newValue);
     }
   };

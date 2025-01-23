@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 
 interface PostLeaderboardItemProps {
   name: string;
@@ -11,20 +11,20 @@ export const usePostHighscore = () => {
     mutationFn: async (body: PostLeaderboardItemProps) => {
       const url = process.env["VITE_QUIZ_API"] + "/api/leaderboard";
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
       if (!response.ok) {
-        throw new Error('Error: ' + response.statusText);
+        throw new Error("Error: " + response.statusText);
       }
 
       return response.json();
-    }
+    },
   });
 
   return { mutate, isPending, isError, error, isSuccess, data };
-}
+};

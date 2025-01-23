@@ -3,14 +3,14 @@ import { useFetchWords } from "../../hooks/data-fetch/useFetchWords";
 import Layout from "../../components/Layout";
 import { Size, GeneralGameState } from "../../types/constants";
 import { ButtonComponent } from "../../components/ButtonComponent";
-import { WordWheelLetters } from "../../components/word-wheel-letters/WordWheelLetters";
-import { CorrectWords } from "../../components/CorrectWords";
+import { WordWheelLetters } from "../../components/word-wheel/word-wheel-letters/WordWheelLetters";
+import { CorrectWords } from "../../components/word-wheel/CorrectWords";
 import { EXAMPLE_WORD_LIST } from "../../lib/exampleWordList";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { ResultsPopup } from "../../components/modals/results-modal/ResultsPopup";
+import { WordWheelResults } from "../../components/word-wheel/WordWheelResults";
 import { SingleLetter } from "../../types/types";
 import { useMediaQuery } from "@mui/material";
-import { CorrectWordsModal } from "../../components/modals/correct-words-modal/CorrectWordsModal";
+import { CorrectWordsModal } from "../../components/word-wheel/correct-words-modal/CorrectWordsModal";
 
 type WordWheelProps = {
   wordLength: number;
@@ -35,7 +35,8 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
   const [pressedLetters, setPressedLetters] = useState<boolean[]>(
     Array(9).fill(false),
   );
-  const [openCorrectWordsModal, setOpenCorrectWordsModal ] = useState<boolean>(false);
+  const [openCorrectWordsModal, setOpenCorrectWordsModal] =
+    useState<boolean>(false);
 
   const isMobile = useMediaQuery("(max-width:567px)");
 
@@ -116,78 +117,97 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
     setPressedLetters(Array(9).fill(false));
     setRefreshKey(1 + refreshKey);
   }
-
+  console.log(openResults);
   return (
     <Layout size={Size.large}>
-      <div className="flex flex-row justify-between">
-        <div className="">
-          <div className="text-2xl mb-4">Word wheel</div>
-          <div className="text-lg mb-2 max-w-[290px]">
-            Find words with more than 3 letters using the central letter.
-          </div>
-        </div>
-        <CountdownCircleTimer
-          size={85}
-          duration={600}
-          isPlaying={gameState != GeneralGameState.Finish}
-          colors={["#F7B801", "#A30000", "#A30000"]}
-          colorsTime={[10, 5, 0]}
-        >
-          {renderTime}
-        </CountdownCircleTimer>
-      </div>
-      <form autoComplete="off">
-        <div className="flex flex-row flex-grow gap-2 justify-between flex-wrap">
-          <WordWheelLetters
-            letters={data.letters}
-            mainLetter={data.mainLetter}
-            key={refreshKey}
-            handlePress={handlePress}
-            pressedLetters={pressedLetters}
-          ></WordWheelLetters>
-          { isMobile ? <div><ButtonComponent text="Show correct words" type="secondary" className="mb-5" onClick={() => setOpenCorrectWordsModal(true)}></ButtonComponent><CorrectWordsModal correctWords={correctWords} open={openCorrectWordsModal} setOpen={setOpenCorrectWordsModal}></CorrectWordsModal></div> : <CorrectWords words={correctWords}></CorrectWords>}
-        </div>
-        <div className="mb-2 mt-2">9 letter word hint: {data.hint}</div>
-        <div className="flex flex-row flex-grow gap-2 flex-wrap">
-          <div className="w-[47%]">
-            <div className="text-2xl border-2 border-gray-500 rounded p-1">
-              &nbsp;{guess}
+      {openResults == false ? (
+        <div>
+          <div className="flex flex-row justify-between">
+            <div className="">
+              <div className="text-2xl mb-4">Word wheel</div>
+              <div className="text-lg mb-2 max-w-[290px]">
+                Find words with more than 3 letters using the central letter.
+              </div>
             </div>
-            {GeneralGameState.Incorrect == gameState && (
-              <div className="text-red-500 font-bold">{errorText}</div>
-            )}
+            <CountdownCircleTimer
+              size={85}
+              duration={600}
+              isPlaying={gameState != GeneralGameState.Finish}
+              colors={["#F7B801", "#A30000", "#A30000"]}
+              colorsTime={[10, 5, 0]}
+            >
+              {renderTime}
+            </CountdownCircleTimer>
           </div>
-          <div className="flex flex-row flex-grow gap-2">
-            <ButtonComponent
-              type="primary"
-              height={44}
-              text={"Add"}
-              width={80}
-              onClick={handleSubmit}
-            ></ButtonComponent>
-            <ButtonComponent
-              type="secondary"
-              height={44}
-              text={"Clear"}
-              onClick={handleClearText}
-              width={80}
-            ></ButtonComponent>
-            <ButtonComponent
-              type="secondary"
-              height={44}
-              text={"Finish"}
-              onClick={handleFinish}
-              width={100}
-            ></ButtonComponent>
-          </div>
+          <form autoComplete="off">
+            <div className="flex flex-row flex-grow gap-2 justify-between flex-wrap">
+              <WordWheelLetters
+                letters={data.letters}
+                mainLetter={data.mainLetter}
+                key={refreshKey}
+                handlePress={handlePress}
+                pressedLetters={pressedLetters}
+              ></WordWheelLetters>
+              {isMobile ? (
+                <div>
+                  <ButtonComponent
+                    text="Show correct words"
+                    type="secondary"
+                    className="mb-5"
+                    onClick={() => setOpenCorrectWordsModal(true)}
+                  ></ButtonComponent>
+                  <CorrectWordsModal
+                    correctWords={correctWords}
+                    open={openCorrectWordsModal}
+                    setOpen={setOpenCorrectWordsModal}
+                  ></CorrectWordsModal>
+                </div>
+              ) : (
+                <CorrectWords words={correctWords}></CorrectWords>
+              )}
+            </div>
+            <div className="mb-2 mt-2">9 letter word hint: {data.hint}</div>
+            <div className="flex flex-row flex-grow gap-2 flex-wrap">
+              <div className="w-[47%]">
+                <div className="text-2xl border-2 border-gray-500 rounded p-1">
+                  &nbsp;{guess}
+                </div>
+                {GeneralGameState.Incorrect == gameState && (
+                  <div className="text-red-500 font-bold">{errorText}</div>
+                )}
+              </div>
+              <div className="flex flex-row flex-grow gap-2">
+                <ButtonComponent
+                  type="primary"
+                  height={44}
+                  text={"Add"}
+                  width={80}
+                  onClick={handleSubmit}
+                ></ButtonComponent>
+                <ButtonComponent
+                  type="secondary"
+                  height={44}
+                  text={"Clear"}
+                  onClick={handleClearText}
+                  width={80}
+                ></ButtonComponent>
+                <ButtonComponent
+                  type="secondary"
+                  height={44}
+                  text={"Finish"}
+                  onClick={handleFinish}
+                  width={100}
+                ></ButtonComponent>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-      {derivedWords && (
-        <ResultsPopup
+      ) : (
+        <WordWheelResults
           open={openResults}
           derivedWords={derivedWords}
           corretWords={correctWords}
-        ></ResultsPopup>
+        ></WordWheelResults>
       )}
     </Layout>
   );

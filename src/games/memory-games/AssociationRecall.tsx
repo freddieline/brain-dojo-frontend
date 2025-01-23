@@ -2,7 +2,7 @@ import { PairQuestion } from "../../types/types";
 import { GeneralGameState, Size } from "../../types/constants";
 import { HiCheckCircle } from "react-icons/hi";
 import { TextInput } from "flowbite-react";
-import Results from "../../components/Results";
+import Results from "../../components/multiple-choice-quiz/QuizResults";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import React from "react";
 import cx from "classnames";
