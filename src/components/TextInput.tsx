@@ -44,6 +44,7 @@ export const TextInput: React.FC<InputProps> = ({
       error={error}
       helperText={helperText}
       size="small"
+      className="bg-white"
       {...props}
     />
   );

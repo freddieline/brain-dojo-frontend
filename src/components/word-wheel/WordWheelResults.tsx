@@ -71,7 +71,7 @@ export const WordWheelResults: React.FC<InputProps> = ({
               Collins English Dictionary
             </a>
           </div>
-          <div className="flex flex-row mt-4 h-[200px] overflow-scroll border-[2px] p-2">
+          <div className="flex flex-row mt-4 h-[200px] overflow-scroll border-[2px] p-2 bg-white">
             <ul className="w-[50%]">
               {evenIndexItems.length > 0 &&
                 evenIndexItems.map((word: string) => (

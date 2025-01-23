@@ -4,7 +4,7 @@ type InputProps = {
 
 export const CorrectWords: React.FC<InputProps> = ({ words }) => {
   return (
-    <div className={"ml-4 mb-4"}>
+    <div className={"ml-4 mb-4 bg-white"}>
       <div className="flex flex-row justify-between mb-2">
         <div>Words found: </div>
         <div className="right">{words.length}</div>
