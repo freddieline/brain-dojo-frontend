@@ -16,7 +16,7 @@ export const ButtonComponent: React.FC<PrimaryButtonInputProps> = ({
   type = "primary",
   text,
   autoFocus,
-  width = 200,
+  width = 160,
   height = 44,
   onClick,
   submit = false,

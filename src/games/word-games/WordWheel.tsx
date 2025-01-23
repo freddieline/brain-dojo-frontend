@@ -154,6 +154,7 @@ export const WordWheel: React.FC<WordWheelProps> = ({ wordLength }) => {
                     text="Show correct words"
                     type="secondary"
                     className="mb-5"
+                    width={200}
                     onClick={() => setOpenCorrectWordsModal(true)}
                   ></ButtonComponent>
                   <CorrectWordsModal
